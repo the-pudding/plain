@@ -18,8 +18,8 @@
 
 	/* presets */
 	--border-radius: 4px;
-	--font-body: var(--mono);
-	--font-form: var(--mono);
+	--font-body: var(--sans);
+	--font-form: var(--sans);
 	--color-bg: var(--color-white);
 	--color-fg: var(--color-off-black);
 	--color-placeholder: var(--color-gray-dark);
@@ -30,5 +30,10 @@
 	--color-border: var(--color-gray-light);
 	--color-selection: var(--color-gray-light);
   --color-highlight: var(--color-yellow);
-	
+
+	--column-width: 30em;
+}
+
+p {
+	font-size: 18px;
 }
