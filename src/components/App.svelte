@@ -3,14 +3,21 @@
   import Intro from "$components/Intro.svelte";
   import Prose from "$components/Prose.svelte";
   import Footer from "$components/Footer.svelte";
+  import Toggle from "$components/helpers/Toggle.svelte";
   import copy from "$data/doc.json";
 
   setContext("App", { copy });
 
-  let plainVisible = false;
+  let toggle = "off";
+
+  $: plainVisible = toggle === "on";
 </script>
 
 <Intro />
+
+<div class="toggle">
+  <Toggle label="Plain Version" bind:value={toggle} />
+</div>
 
 {#each copy.parts as { part, chunks }}
   <section id="part-{part}">
@@ -47,5 +54,11 @@
   figure {
     height: 25vh;
     background: aquamarine;
+  }
+
+  .toggle {
+    position: fixed;
+    top: 1em;
+    right: 1em;
   }
 </style>
