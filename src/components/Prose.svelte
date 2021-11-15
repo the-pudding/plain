@@ -12,10 +12,6 @@
           <li>{@html v}</li>
         {/each}
       </ul>
-    {:else if type === "graphic"}
-      <figure>
-        <figcaption>graphic: {value}</figcaption>
-      </figure>
     {/if}
   {/each}
 </div>
