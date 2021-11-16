@@ -16,7 +16,7 @@
 <Intro />
 
 <div class="toggle">
-  <Toggle label="Plain Version" bind:value={toggle} />
+  <Toggle label="Plain Language" bind:value={toggle} />
 </div>
 
 {#each copy.parts as { part, chunks }}
