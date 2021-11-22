@@ -4,7 +4,7 @@
   import Prose from "$components/Prose.svelte";
   import Footer from "$components/Footer.svelte";
   import Toggle from "$components/helpers/Toggle.svelte";
-  import Kyra from "$components/Kyra.svelte";
+  import InAction from "$components/InAction.svelte";
   import copy from "$data/doc.json";
 
   setContext("App", { copy });
@@ -24,7 +24,7 @@
 
 {#each copy.parts as { part, chunks }}
   <section id="part-{part}">
-    {#each chunks as { standard, plain, graphic }}
+    {#each chunks as { standard, plain, graphic, graphicText }}
       <div class="standard" class:visible={!plainVisible}>
         {#if standard}
           <Prose data={standard} />
@@ -35,7 +35,9 @@
           <Prose data={plain} />
         {/if}
       </div>
-      {#if graphic}
+      {#if graphic === "in-action"}
+        <InAction text={graphicText} />
+      {:else}
         <figure>
           <figcaption>graphic: {graphic}</figcaption>
         </figure>
