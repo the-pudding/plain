@@ -4,6 +4,7 @@
   import Prose from "$components/Prose.svelte";
   import Footer from "$components/Footer.svelte";
   import Toggle from "$components/helpers/Toggle.svelte";
+  import Kyra from "$components/Kyra.svelte";
   import copy from "$data/doc.json";
 
   setContext("App", { copy });
@@ -11,6 +12,8 @@
   let toggle = "off";
 
   $: plainVisible = toggle === "on";
+
+  console.log(copy);
 </script>
 
 <Intro />
