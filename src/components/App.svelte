@@ -4,7 +4,7 @@
   import Prose from "$components/Prose.svelte";
   import Footer from "$components/Footer.svelte";
   import Toggle from "$components/helpers/Toggle.svelte";
-  import InAction from "$components/InAction.svelte";
+  import SideBySide from "$components/SideBySide.svelte";
   import copy from "$data/doc.json";
 
   setContext("App", { copy });
@@ -38,12 +38,16 @@
 
       {#if graphic}
         {#if graphic.name === "in-action"}
-          <InAction data={graphic} />
+          <SideBySide data={graphic} />
         {:else if graphic.name === "characteristics"}
-          <InAction data={graphic} pen={true} {toggle} />
+          <SideBySide data={graphic} pen={true} {toggle} />
+        {:else if graphic.name === "translation"}
+          <SideBySide data={graphic} />
+        {:else if graphic.name === "translation-steps"}
+          <SideBySide data={graphic} menu={true} />
         {:else}
           <figure>
-            <figcaption>graphic: {graphic}</figcaption>
+            <figcaption>graphic: {graphic.name}</figcaption>
           </figure>
         {/if}
       {/if}

@@ -2,14 +2,15 @@
   import { annotate } from "rough-notation";
   import inView from "$actions/inView.js";
   import { onMount } from "svelte";
+  import { geoOrthographic } from "d3-geo";
 
   export let data;
   export let pen = false;
   export let toggle = null;
+  export let menu = false;
 
   let mounted = false;
-  const before = data.before;
-  const after = data.after;
+  const { name, before, after } = data;
   let boxAnno;
   let underlineAnno;
   let bracketAnno;
@@ -22,12 +23,14 @@
 
   onMount(() => {
     mounted = true;
-    const boxEl = document.querySelector("span.box");
-    boxAnno = annotate(boxEl, { type: "box", color: "red", animate: true });
-    const underlineEl = document.querySelector("span.underline");
-    underlineAnno = annotate(underlineEl, { type: "underline", color: "red", animate: true });
-    const bracketEl = document.querySelector(".bracket");
-    bracketAnno = annotate(bracketEl, { type: "bracket", color: "red", animate: true });
+    if (pen) {
+      const boxEl = document.querySelector(`span#box-${name}`);
+      boxAnno = annotate(boxEl, { type: "box", color: "red", animate: true });
+      const underlineEl = document.querySelector(`span#underline-${name}`);
+      underlineAnno = annotate(underlineEl, { type: "underline", color: "red", animate: true });
+      const bracketEl = document.querySelector(`#${name} .bracket`);
+      bracketAnno = annotate(bracketEl, { type: "bracket", color: "red", animate: true });
+    }
   });
 
   const showAnnotations = () => {
@@ -39,31 +42,35 @@
   };
   const hideAnnotations = () => {
     if (mounted && pen) {
-      boxAnno.hide();
-      underlineAnno.hide();
-      bracketAnno.hide();
+      if (boxAnno.isShowing()) boxAnno.hide();
+      if (underlineAnno.isShowing()) underlineAnno.hide();
+      if (bracketAnno.isShowing()) bracketAnno.hide();
     }
   };
 </script>
 
-<div class="container" use:inView on:enter={showAnnotations} on:exit={hideAnnotations}>
+<div class="container" id={name} use:inView on:enter={showAnnotations} on:exit={hideAnnotations}>
   <div class="before">
     <h3>ORIGINAL</h3>
     <p class:fade={pen}>{@html before}</p>
   </div>
   <div class="after">
     <h3>PLAIN LANGUAGE</h3>
-    {#each after as { type, value }}
-      {#if type === "text"}
-        <p class:fade={pen}>{@html value}</p>
-      {:else if type === "list"}
-        <ul class:bracket={pen} class:fade={pen}>
-          {#each value as v}
-            <li>{@html v}</li>
-          {/each}
-        </ul>
-      {/if}
-    {/each}
+    {#if typeof after === "string"}
+      <p class:fade={pen}>{@html after}</p>
+    {:else}
+      {#each after as { type, value }}
+        {#if type === "text"}
+          <p class:fade={pen}>{@html value}</p>
+        {:else if type === "list"}
+          <ul class:bracket={pen} class:fade={pen}>
+            {#each value as v}
+              <li>{@html v}</li>
+            {/each}
+          </ul>
+        {/if}
+      {/each}
+    {/if}
   </div>
 </div>
 
