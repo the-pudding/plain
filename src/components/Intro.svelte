@@ -1,14 +1,21 @@
 <script>
-  import { getContext } from "svelte";
+  import { annotate } from "rough-notation";
+  import { getContext, onMount } from "svelte";
 
   const { copy } = getContext("App");
+
+  onMount(() => {
+    const el = document.querySelector("span.circle");
+    const annotation = annotate(el, { type: "circle", color: "red", animate: true });
+    annotation.show();
+  });
 </script>
 
 <section id="intro">
   <div>
-    <h1>{copy.hed}</h1>
-    <p class="dek">{copy.dek}</p>
-    <p class="author">{copy.author}</p>
+    <h1>{@html copy.hed}</h1>
+    <p class="dek">{@html copy.dek}</p>
+    <p class="author">{@html copy.author}</p>
   </div>
 </section>
 
