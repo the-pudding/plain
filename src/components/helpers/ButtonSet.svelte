@@ -110,8 +110,8 @@
 
   input[type="radio"]:checked + label,
   input[type="radio"]:checked:hover + label {
-    background: var(--color-off-black);
-    color: var(--color-white);
+    background: var(--color-orange);
+    color: var(--color-off-black);
   }
 
   input[type="radio"]:hover + label {

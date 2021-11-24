@@ -43,8 +43,8 @@
           <SideBySide data={graphic} pen={true} {toggle} />
         {:else if graphic.name === "translation"}
           <SideBySide data={graphic} />
-        {:else if graphic.name === "translation-steps"}
-          <SideBySide data={graphic} menu={true} />
+        {:else if graphic.name === "steps"}
+          <SideBySide data={graphic} menu={true} pen={true} />
         {:else}
           <figure>
             <figcaption>graphic: {graphic.name}</figcaption>
