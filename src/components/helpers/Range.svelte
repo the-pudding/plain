@@ -5,6 +5,7 @@
   export let step = 1;
   export let showTicks = false;
   export let value = min;
+  export let labels = null;
 
   const getDecimalCount = (value) => {
     if (Math.floor(value) === value) return 0;
@@ -18,7 +19,7 @@
 <div class="range">
   <div class="ticks">
     {#each ticks as tick}
-      <span class="tick">{format(`.${decimals}f`)(tick)}</span>
+      <span class="tick">{labels ? labels[tick] : format(`.${decimals}f`)(tick)}</span>
     {/each}
   </div>
   <input type="range" {min} {max} {step} bind:value />

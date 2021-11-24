@@ -41,6 +41,9 @@
     },
     "tan": {
       "value": "#F4E7D7"
+    },
+    "orange-dark": {
+      "value": "#B26430"
     }
   }
 }

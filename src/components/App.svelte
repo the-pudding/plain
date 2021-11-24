@@ -5,6 +5,7 @@
   import Footer from "$components/Footer.svelte";
   import Toggle from "$components/helpers/Toggle.svelte";
   import SideBySide from "$components/SideBySide.svelte";
+  import Slide from "$components/Slide.svelte";
   import copy from "$data/doc.json";
 
   setContext("App", { copy });
@@ -45,6 +46,15 @@
           <SideBySide data={graphic} />
         {:else if graphic.name === "steps"}
           <SideBySide data={graphic} menu={true} pen={true} />
+        {:else if graphic.name === "flesch" || graphic.name === "dale"}
+          <Slide
+            progression={graphic.progression}
+            algorithm={graphic.name === "flesch"
+              ? "Flesch-Kincaid"
+              : graphic.name === "dale"
+              ? "Dale-Chall"
+              : null}
+          />
         {:else}
           <figure>
             <figcaption>graphic: {graphic.name}</figcaption>
