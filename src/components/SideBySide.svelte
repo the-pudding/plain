@@ -1,7 +1,8 @@
 <script>
-  import { annotate } from "rough-notation";
+  import { annotate, annotationGroup } from "rough-notation";
   import inView from "$actions/inView.js";
   import { onMount } from "svelte";
+  import { selectAll, select } from "d3";
 
   export let data;
   export let pen = false;
@@ -10,9 +11,7 @@
 
   let mounted = false;
   const { name, before, after, steps } = data;
-  let boxAnno;
-  let underlineAnno;
-  let bracketAnno;
+  let annotations = [];
 
   $: toggle, redraw();
   const redraw = () => {
@@ -21,32 +20,40 @@
   };
 
   onMount(() => {
-    mounted = true;
     if (pen) {
-      // todo: make groups for each of these so you get all instances
-      const boxEl = document.querySelector(`span#box-${name}`);
-      const boxEls = document.querySelectorAll(`span#box-${name}`);
-      boxAnno = annotate(boxEls, { type: "box", color: "red", animate: true });
-
-      const underlineEl = document.querySelector(`span#underline-${name}`);
-      underlineAnno = annotate(underlineEl, { type: "underline", color: "red", animate: true });
-      const bracketEl = document.querySelector(`#${name} .bracket`);
-      bracketAnno = annotate(bracketEl, { type: "bracket", color: "red", animate: true });
+      initAnnotations(["box", "underline"]);
     }
+    mounted = true;
   });
+  const initAnnotations = (types) => {
+    let annos = [];
+    types.forEach((type) => {
+      const els = document.querySelectorAll(`span#${type}-${name}`);
+      selectAll(els).classed("pen", true);
+
+      els.forEach((el) => {
+        const anno = annotate(el, { type, color: "red", animate: true });
+        annos.push(anno);
+      });
+    });
+
+    // bracket for list
+    const bracketEl = document.querySelector(`#${name} ul`);
+    select(bracketEl).classed("pen", true);
+    const bracketAnno = annotate(bracketEl, { type: "bracket", color: "red", animate: true });
+    annos.push(bracketAnno);
+
+    annotations = annotationGroup(annos);
+  };
 
   const showAnnotations = () => {
     if (mounted && pen) {
-      boxAnno.show();
-      underlineAnno.show();
-      bracketAnno.show();
+      annotations.show();
     }
   };
   const hideAnnotations = () => {
     if (mounted && pen) {
-      if (boxAnno.isShowing()) boxAnno.hide();
-      if (underlineAnno.isShowing()) underlineAnno.hide();
-      if (bracketAnno.isShowing()) bracketAnno.hide();
+      annotations.hide();
     }
   };
 </script>
@@ -73,7 +80,7 @@
           {#if type === "text"}
             <p class:fade={pen}>{@html value}</p>
           {:else if type === "list"}
-            <ul class:bracket={pen} class:fade={pen}>
+            <ul>
               {#each value as v}
                 <li>{@html v}</li>
               {/each}
@@ -124,8 +131,8 @@
     margin-top: 0;
     margin-bottom: 0.5em;
   }
-  :global(span) {
-    color: rgba(40, 40, 40, 1);
+  :global(.pen) {
+    color: rgba(40, 40, 40, 1) !important;
   }
   .fade {
     color: rgba(40, 40, 40, 0.4);
