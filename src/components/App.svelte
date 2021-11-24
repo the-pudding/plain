@@ -6,6 +6,7 @@
   import Toggle from "$components/helpers/Toggle.svelte";
   import SideBySide from "$components/SideBySide.svelte";
   import Slide from "$components/Slide.svelte";
+  import Books from "$components/Books.svelte";
   import copy from "$data/doc.json";
 
   setContext("App", { copy });
@@ -55,10 +56,8 @@
               ? "Dale-Chall"
               : null}
           />
-        {:else}
-          <figure>
-            <figcaption>graphic: {graphic.name}</figcaption>
-          </figure>
+        {:else if graphic.name === "books"}
+          <Books />
         {/if}
       {/if}
     {/each}

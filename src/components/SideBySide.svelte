@@ -175,5 +175,6 @@
   .description {
     color: var(--color-gray-dark);
     font-style: italic;
+    margin-top: 1em;
   }
 </style>

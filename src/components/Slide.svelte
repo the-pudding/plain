@@ -25,10 +25,6 @@
   <div class="explanation">{explanation}</div>
 </div>
 
-<!-- <p>{text}</p>
-<p>{grade}</p>
-<p>{explanation}</p>
-<Range min={0} max={2} step={1} showTicks={true} bind:value={level} /> -->
 <style>
   .header {
     font-size: 24px;
@@ -51,6 +47,7 @@
     margin-bottom: 1em;
   }
   .text {
+    font-size: 26px;
     background: var(--color-tan);
     padding: 20px;
   }
