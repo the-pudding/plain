@@ -1,10 +1,12 @@
 <script>
+  import MovingText from "$components/MovingText.svelte";
   import Range from "$components/helpers/Range.svelte";
   export let progression;
   export let algorithm;
 
   let level = 1;
-  $: ({ text, grade, explanation } = progression.filter((d) => parseInt(d.level) === level)[0]);
+  $: ({ grade, explanation } = progression.filter((d) => parseInt(d.level) === level)[0]);
+  const allText = progression.map((d) => d.text);
 </script>
 
 <div class="container">
@@ -21,7 +23,7 @@
     bind:value={level}
     labels={["Easy", "Medium", "Hard"]}
   />
-  <div class="text">{text}</div>
+  <MovingText text={allText} {level} {algorithm} />
   <div class="explanation">{explanation}</div>
 </div>
 
@@ -45,11 +47,6 @@
     font-style: italic;
     margin-top: 1em;
     margin-bottom: 1em;
-  }
-  .text {
-    font-size: 26px;
-    background: var(--color-tan);
-    padding: 20px;
   }
   .explanation {
     margin-top: 2em;
