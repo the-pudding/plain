@@ -9,6 +9,7 @@
 
   const [currentLevel, previousLevel] = usePrevious(level);
   $: $currentLevel = level;
+  const duration = 1000;
 
   const words = _.uniq(
     text.reduce((acc, currentValue) => {
@@ -17,6 +18,29 @@
   );
   let currentPositions;
   let allPositions;
+
+  const isExiting = (word) => {
+    const prev = allPositions[word][$previousLevel];
+    return prev && prev.opacity === 1 && currentPositions[word].opacity < 1;
+  };
+  const isEntering = (word) => {
+    const prev = allPositions[word][$previousLevel];
+    return !prev || (prev.opacity === 0 && currentPositions[word].opacity === 1);
+  };
+  const isBeginning = () => $previousLevel === null;
+
+  const getDelay = (word) => {
+    if (isExiting(word)) return `${_.random(0, 1000)}ms`;
+    else if (isEntering(word)) return `${_.random(1600, 3000)}ms`;
+    else return `${_.random(600, 2000)}ms`;
+  };
+  const getPosition = (word) => {
+    const prev = allPositions[word][$previousLevel];
+    if (isExiting(word)) {
+      return [prev.x, prev.y];
+    }
+    return [currentPositions[word].x, currentPositions[word].y];
+  };
 
   $: level, updateWordPositions();
   const updateWordPositions = () => {
@@ -36,9 +60,9 @@
         const w = _.words(text[i]);
         if (w.includes(currentValue)) {
           const el = document.querySelector(`#${algorithm}-${currentValue}-${i}`);
-          data = [...data, { x: el.offsetLeft, y: el.offsetTop, opacity: 1 }];
+          data = [...data, { x: el.offsetLeft, y: el.offsetTop, opacity: 1, scale: 1 }];
         } else {
-          data = [...data, { x: undefined, y: undefined, opacity: 0 }];
+          data = [...data, { x: null, y: null, opacity: 0, scale: 0 }];
         }
       }
 
@@ -68,11 +92,17 @@
   </div>
 
   <div class="text">
-    {#each _.keys(currentPositions) as word}
+    {#each _.keys(currentPositions) as word (word)}
       <span
-        class="word"
+        class:word={true}
+        class:entering={isEntering(word) && !isBeginning()}
+        class:exiting={isExiting(word)}
         id={`${word}`}
-        style={`opacity: ${currentPositions[word].opacity}; left: ${currentPositions[word].x}px; top: ${currentPositions[word].y}px`}
+        style={`--delay: ${getDelay(word)}; --duration: ${duration}ms; left: ${
+          getPosition(word)[0]
+        }px; top: ${getPosition(word)[1]}px; opacity: ${
+          currentPositions[word].opacity
+        }; transform: scale(${currentPositions[word].scale}`}
         >{word}
       </span>
     {/each}
@@ -97,9 +127,14 @@
   }
   .word {
     position: absolute;
-    transition: opacity 2s, top 2s, left 2s;
+    transition: all var(--duration) var(--delay);
   }
   .hide {
     opacity: 0;
+  }
+  .entering {
+    color: red;
+  }
+  .exiting {
   }
 </style>
