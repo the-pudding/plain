@@ -9,7 +9,7 @@
 
   const [currentLevel, previousLevel] = usePrevious(level);
   $: $currentLevel = level;
-  const duration = 1000;
+  const duration = 6000;
 
   const words = _.uniq(
     text.reduce((acc, currentValue) => {
