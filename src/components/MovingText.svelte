@@ -9,7 +9,7 @@
 
   const [currentLevel, previousLevel] = usePrevious(level);
   $: $currentLevel = level;
-  const duration = 6000;
+  const duration = 1000;
 
   const words = _.uniq(
     text.reduce((acc, currentValue) => {
@@ -128,6 +128,7 @@
   .word {
     position: absolute;
     transition: all var(--duration) var(--delay);
+    transform-origin: 50% 50%;
   }
   .hide {
     opacity: 0;
