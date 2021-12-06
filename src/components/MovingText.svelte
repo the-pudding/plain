@@ -2,6 +2,7 @@
   import _ from "lodash";
   import { usePrevious } from "svelte-previous";
   import { onMount } from "svelte";
+  import { getPunctuation, wordsWithPunc, stripPunc } from "./movingText";
 
   export let text;
   export let level;
@@ -11,23 +12,24 @@
   $: $currentLevel = level;
   const duration = 1000;
 
-  const words = _.uniq(
+  let currentPositions;
+  let allPositions;
+
+  const allWords = _.uniq(
     text.reduce((acc, currentValue) => {
       return [...acc, ..._.words(currentValue)];
     }, [])
   );
-  let currentPositions;
-  let allPositions;
 
-  const isExiting = (word) => {
+  const isExiting = (word, level) => {
     const prev = allPositions[word][$previousLevel];
     return prev && prev.opacity === 1 && currentPositions[word].opacity < 1;
   };
-  const isEntering = (word) => {
+  const isEntering = (word, level) => {
     const prev = allPositions[word][$previousLevel];
     return !prev || (prev.opacity === 0 && currentPositions[word].opacity === 1);
   };
-  const isBeginning = () => $previousLevel === null;
+  $: isBeginning = $previousLevel === null;
 
   const getDelay = (word) => {
     if (isExiting(word)) return `${_.random(0, 1000)}ms`;
@@ -45,7 +47,7 @@
   $: level, updateWordPositions();
   const updateWordPositions = () => {
     if (allPositions) {
-      currentPositions = words.reduce((acc, currentValue) => {
+      currentPositions = allWords.reduce((acc, currentValue) => {
         const myState = allPositions[currentValue][level];
         return { ...acc, [currentValue]: myState };
       }, {});
@@ -53,7 +55,7 @@
   };
 
   onMount(() => {
-    allPositions = words.reduce((acc, currentValue) => {
+    allPositions = allWords.reduce((acc, currentValue) => {
       let data = [];
 
       for (let i = 0; i < 3; i++) {
@@ -76,37 +78,39 @@
 <div class="container">
   <div class="spacer">{text[1]}</div>
   <div class="text hide">
-    {#each _.words(text[0]) as word}
-      <span id={`${algorithm}-${word}-0`}>{word} </span>
+    {#each wordsWithPunc(text[0]) as word}
+      <span id={`${algorithm}-${stripPunc(word)}-0`}>{word} </span>
     {/each}
   </div>
   <div class="text hide">
-    {#each _.words(text[1]) as word}
-      <span id={`${algorithm}-${word}-1`}>{word} </span>
+    {#each wordsWithPunc(text[1]) as word}
+      <span id={`${algorithm}-${stripPunc(word)}-1`}>{word} </span>
     {/each}
   </div>
   <div class="text hide">
-    {#each _.words(text[2]) as word}
-      <span id={`${algorithm}-${word}-2`}>{word} </span>
+    {#each wordsWithPunc(text[2]) as word}
+      <span id={`${algorithm}-${stripPunc(word)}-2`}>{word} </span>
     {/each}
   </div>
 
-  <div class="text">
-    {#each _.keys(currentPositions) as word (word)}
-      <span
-        class:word={true}
-        class:entering={isEntering(word) && !isBeginning()}
-        class:exiting={isExiting(word)}
-        id={`${word}`}
-        style={`--delay: ${getDelay(word)}; --duration: ${duration}ms; left: ${
-          getPosition(word)[0]
-        }px; top: ${getPosition(word)[1]}px; opacity: ${
-          currentPositions[word].opacity
-        }; transform: scale(${currentPositions[word].scale}`}
-        >{word}
-      </span>
-    {/each}
-  </div>
+  {#if allPositions}
+    <div class="text">
+      {#each allWords as word}
+        <span
+          class:word={true}
+          class:entering={isEntering(word, level) && !isBeginning}
+          class:exiting={isExiting(word, level)}
+          id={`${word}`}
+          style={`--delay: ${getDelay(word)}; --duration: ${duration}ms; left: ${
+            getPosition(word)[0]
+          }px; top: ${getPosition(word)[1]}px; opacity: ${
+            currentPositions[word].opacity
+          }; transform: scale(${currentPositions[word].scale})`}
+          >{word}{getPunctuation(word, level, text) ? getPunctuation(word, level, text) : ""}
+        </span>
+      {/each}
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -137,5 +141,6 @@
     color: red;
   }
   .exiting {
+    color: purple;
   }
 </style>

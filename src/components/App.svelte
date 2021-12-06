@@ -1,5 +1,5 @@
 <script>
-  import { onMount, setContext } from "svelte";
+  import { setContext } from "svelte";
   import Intro from "$components/Intro.svelte";
   import Prose from "$components/Prose.svelte";
   import Footer from "$components/Footer.svelte";
