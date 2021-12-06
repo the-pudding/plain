@@ -70,6 +70,7 @@
 
   .options {
     display: flex;
+    flex-wrap: wrap;
   }
 
   label {

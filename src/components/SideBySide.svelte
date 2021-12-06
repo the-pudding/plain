@@ -2,6 +2,7 @@
   import { annotate, annotationGroup } from "rough-notation";
   import inView from "$actions/inView.js";
   import ButtonSet from "$components/helpers/ButtonSet.svelte";
+  import Buttons from "$components/Buttons.svelte";
   import { onMount } from "svelte";
   import { selectAll, select, range } from "d3";
 
@@ -16,8 +17,12 @@
   let annotations = [];
   const annotationTypes = ["box", "strike-through", "underline", "highlight"];
   const annotationSpecs = { color: "red", animate: true, multiline: true };
-  const buttonSetOptions = steps
-    ? range(steps.length).map((i) => ({ value: i, label: steps[i].title }))
+  const buttonOptions = steps
+    ? range(steps.length).map((i) => ({
+        value: i,
+        label: steps[i].title,
+        description: steps[i].description
+      }))
     : null;
 
   $: step, advanceStep();
@@ -91,14 +96,11 @@
     }
     annotations = annotationGroup(annos);
   };
+
+  $: console.log({ step });
 </script>
 
 <div class="container" id={name} use:inView on:enter={showAnnotations} on:exit={hideAnnotations}>
-  {#if menu && buttonSetOptions}
-    <div class="buttons">
-      <ButtonSet options={buttonSetOptions} bind:value={step} />
-    </div>
-  {/if}
   <div class="texts">
     <div class="before">
       <h3>ORIGINAL</h3>
@@ -124,7 +126,11 @@
     </div>
   </div>
 
-  {#if steps}<div class="description">{steps[step].description}</div> {/if}
+  {#if menu && buttonOptions}
+    <div class="buttons">
+      <Buttons options={buttonOptions} bind:value={step} />
+    </div>
+  {/if}
 </div>
 
 <style>

@@ -10,8 +10,10 @@
 
   const [currentLevel, previousLevel] = usePrevious(level);
   $: $currentLevel = level;
-  const duration = 1000;
+  $: isBeginning = $previousLevel === null;
+  $: level, updateWordPositions();
 
+  const duration = 1000;
   let currentPositions;
   let allPositions;
 
@@ -20,7 +22,6 @@
       return [...acc, ..._.words(currentValue)];
     }, [])
   );
-
   const isExiting = (word, level) => {
     const prev = allPositions[word][$previousLevel];
     return prev && prev.opacity === 1 && currentPositions[word].opacity < 1;
@@ -29,8 +30,6 @@
     const prev = allPositions[word][$previousLevel];
     return !prev || (prev.opacity === 0 && currentPositions[word].opacity === 1);
   };
-  $: isBeginning = $previousLevel === null;
-
   const getDelay = (word) => {
     if (isExiting(word)) return `${_.random(0, 1000)}ms`;
     else if (isEntering(word)) return `${_.random(1600, 3000)}ms`;
@@ -43,8 +42,6 @@
     }
     return [currentPositions[word].x, currentPositions[word].y];
   };
-
-  $: level, updateWordPositions();
   const updateWordPositions = () => {
     if (allPositions) {
       currentPositions = allWords.reduce((acc, currentValue) => {
@@ -141,6 +138,5 @@
     color: red;
   }
   .exiting {
-    color: purple;
   }
 </style>
