@@ -36,7 +36,7 @@
     font-weight: bold;
   }
   .container {
-    max-width: 30em;
+    max-width: var(--column-width);
     margin: 0 auto;
     margin-top: 4em;
     margin-bottom: 6em;

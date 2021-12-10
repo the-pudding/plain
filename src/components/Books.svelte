@@ -31,7 +31,7 @@
 <style>
   .container {
     display: flex;
-    max-width: 30em;
+    max-width: var(--column-width);
     margin: 0 auto;
     margin-top: 4em;
     margin-bottom: 4em;

@@ -2,8 +2,8 @@
   import { onMount } from "svelte";
   import _ from "lodash";
 
-  export let standard;
-  export let plain;
+  export let standard = "";
+  export let plain = "";
   export let adjustments;
   export let i;
 
@@ -75,7 +75,7 @@
 
 <style>
   .outer {
-    width: 34em;
+    width: var(--column-width);
     margin: 0 auto;
     transition: margin-top 1s;
     margin-top: var(--marginTop);
@@ -95,7 +95,7 @@
   }
 
   .text {
-    width: 30em;
+    width: var(--column-width);
   }
   .text:hover {
     cursor: pointer;

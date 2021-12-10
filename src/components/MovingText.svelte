@@ -124,7 +124,7 @@
     position: absolute;
     top: 0;
     padding: 20px;
-    max-width: 30em;
+    max-width: var(--column-width);
   }
   .word {
     position: absolute;
