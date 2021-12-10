@@ -8,6 +8,7 @@
   export let i;
 
   let mounted = false;
+  let noPlain = plain === "";
   let view = "standard";
   let containerEl;
   let refs = [];
@@ -22,6 +23,11 @@
 
   const updateAdjustments = () => {
     if (mounted) {
+      if (noPlain) {
+        adjustments[i] = 0;
+        return;
+      }
+
       const getHeights = (d) => {
         const heightWithoutMargin = d.getBoundingClientRect().height;
         const formatPx = (str) => parseFloat(str.replace("px"));
@@ -55,21 +61,35 @@
     class:show-standard={view === "standard"}
     bind:this={containerEl}
   >
-    {#each ["standard", "plain"] as v, i}
-      <div class={`text ${v}`} class:faded={view !== v} on:click={switchView} bind:this={refs[i]}>
-        {#each v === "standard" ? standard : plain as { type, value }}
-          {#if type === "text"}
-            <p>{@html value}</p>
-          {:else if type === "list"}
-            <ul>
-              {#each value as v}
-                <li>{@html v}</li>
-              {/each}
-            </ul>
-          {/if}
-        {/each}
-      </div>
-    {/each}
+    {#if plain === ""}
+      {#each standard as { type, value }}
+        {#if type === "text"}
+          <p class="just-standard">{@html value}</p>
+        {:else if type === "list"}
+          <ul class="just-standard">
+            {#each value as v}
+              <li>{@html v}</li>
+            {/each}
+          </ul>
+        {/if}
+      {/each}
+    {:else}
+      {#each ["standard", "plain"] as v, i}
+        <div class={`text ${v}`} class:faded={view !== v} on:click={switchView} bind:this={refs[i]}>
+          {#each v === "standard" ? standard : plain as { type, value }}
+            {#if type === "text"}
+              <p>{@html value}</p>
+            {:else if type === "list"}
+              <ul>
+                {#each value as v}
+                  <li>{@html v}</li>
+                {/each}
+              </ul>
+            {/if}
+          {/each}
+        </div>
+      {/each}
+    {/if}
   </div>
 </div>
 
@@ -88,14 +108,17 @@
     transition: transform 1s;
   }
   .show-plain {
-    transform: translate(-45%, 0%);
+    transform: translate(-40%, 0%);
   }
   .show-standard {
-    transform: translate(0%, 0%);
+    transform: translate(5%, 0%);
   }
 
   .text {
-    width: var(--column-width);
+    width: 25em;
+  }
+  .just-standard {
+    width: 30em;
   }
   .text:hover {
     cursor: pointer;

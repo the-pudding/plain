@@ -5,11 +5,13 @@
 
   export let part;
   export let chunks;
+  export let title;
 
   let adjustments = _.times(chunks.length, _.constant(0));
 </script>
 
 <section id="part-{part}">
+  <h1>{title}</h1>
   {#each chunks as { standard, plain, graphic }, i}
     <Prose {standard} {plain} bind:adjustments {i} />
 
@@ -20,17 +22,8 @@
 </section>
 
 <style>
-  .plain,
-  .standard {
-    display: none;
-  }
-
-  .visible {
-    display: block;
-  }
-
-  figure {
-    height: 25vh;
-    background: aquamarine;
+  section {
+    width: var(--column-width);
+    margin: 0 auto;
   }
 </style>

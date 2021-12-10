@@ -12,8 +12,8 @@
 
 <Intro />
 
-{#each copy.parts as { part, chunks }}
-  <Part {part} {chunks} />
+{#each copy.parts as { part, title, chunks }}
+  <Part {part} {title} {chunks} />
 {/each}
 
 <Footer />
