@@ -56,7 +56,7 @@
     bind:this={containerEl}
   >
     {#each ["standard", "plain"] as v, i}
-      <div class={`text ${v}`} on:click={switchView} bind:this={refs[i]}>
+      <div class={`text ${v}`} class:faded={view !== v} on:click={switchView} bind:this={refs[i]}>
         {#each v === "standard" ? standard : plain as { type, value }}
           {#if type === "text"}
             <p>{@html value}</p>
@@ -75,17 +75,20 @@
 
 <style>
   .outer {
-    width: 30em;
+    width: 34em;
     margin: 0 auto;
+    transition: margin-top 1s;
     margin-top: var(--marginTop);
     display: flex;
     overflow: hidden;
+    position: relative;
   }
   .inner {
     display: flex;
+    transition: transform 1s;
   }
   .show-plain {
-    transform: translate(-50%, 0%);
+    transform: translate(-45%, 0%);
   }
   .show-standard {
     transform: translate(0%, 0%);
@@ -94,12 +97,48 @@
   .text {
     width: 30em;
   }
+  .text:hover {
+    cursor: pointer;
+  }
+  .faded {
+    opacity: 0.3;
+  }
   .standard {
-    background: steelblue;
+    margin-right: 1em;
   }
   .plain {
-    background: gold;
+    color: steelblue;
   }
+  /* .outer::before {
+    position: absolute;
+    content: "";
+    background-image: -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      from(rgba(255, 255, 255, 1)),
+      to(rgba(255, 255, 255, 0))
+    );
+    width: 100px;
+    height: 100%;
+    z-index: 1000;
+    left: 0;
+  }
+  .outer:after {
+    position: absolute;
+    content: "";
+    background-image: -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      from(rgba(255, 255, 255, 1)),
+      to(rgba(255, 255, 255, 0))
+    );
+    width: 100px;
+    height: 100%;
+    z-index: 1000;
+    right: 0;
+  } */
 
   ul {
     padding-left: 1em;
