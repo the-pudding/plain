@@ -12,8 +12,17 @@
 
 <section id="part-{part}">
   <h1>{title}</h1>
-  {#each chunks as { standard, plain, graphic }, i}
-    <Prose {standard} {plain} bind:adjustments {i} />
+  {#each chunks as { standard, plain, graphic, deepDive, subchunks, description }, i}
+    {#if deepDive}
+      <details>
+        <summary>{description}</summary>
+        {#each subchunks as subchunk}
+          <Prose standard={subchunk.standard} plain={subchunk.plain} bind:adjustments {i} />
+        {/each}
+      </details>
+    {:else}
+      <Prose {standard} {plain} bind:adjustments {i} />
+    {/if}
 
     {#if graphic}
       <Graphic {graphic} />
@@ -25,5 +34,8 @@
   section {
     width: var(--column-width);
     margin: 0 auto;
+  }
+  summary:hover {
+    cursor: pointer;
   }
 </style>

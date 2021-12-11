@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import Icon from "$components/helpers/Icon.svelte";
 
   export let data;
 
@@ -22,7 +23,10 @@
 </script>
 
 <div class="container">
-  <div class="tooltip" class:view-tooltip={step !== null}>{description}</div>
+  <div class="tooltip" class:view-tooltip={step !== null}>
+    {description}
+    <div class="close" on:click={() => (step = null)}><Icon name="x" /></div>
+  </div>
   <div class="texts">
     <div class="before">
       <h3>ORIGINAL</h3>
@@ -68,7 +72,24 @@
     left: 15%;
     border: 1px solid lightgrey;
     background: white;
-    padding: 20px;
+    padding: 18px;
+    box-shadow: 0 0 10px lightgrey;
+    border-radius: 10px;
+  }
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 1;
+    background: lightgrey;
+    font-size: 1.2em;
+    -webkit-transform: translate(50%, -50%);
+    transform: translate(50%, -50%);
+    padding: 0.25em;
+    pointer-events: all;
+  }
+  .close:hover {
+    cursor: pointer;
   }
   .view-tooltip {
     display: block;
