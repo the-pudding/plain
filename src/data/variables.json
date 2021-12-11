@@ -19,10 +19,11 @@
     "purple": "#a239ca",
     "blue": "#4717f6",
     "green": "#34a29e",
-    "red": "#ff533d",
-    "yellow": "#e5e338",
-    "orange": "#F6C672",
-    "tan": "#F4E7D7",
-    "orange-dark": "#B26430"
+    "light-red": "#f4cccc",
+    "light-orange": "#fce5cd",
+    "light-yellow": "#fff2cc",
+    "light-green": "#d9ead3",
+    "light-blue": "#cfe2f3",
+    "light-purple": "#d9d2e9"
   }
 }

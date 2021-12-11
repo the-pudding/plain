@@ -1,8 +1,19 @@
 <script>
   import { onMount } from "svelte";
+  import _ from "lodash";
   import Icon from "$components/helpers/Icon.svelte";
+  import variables from "$data/variables.json";
 
   export let data;
+
+  const colors = [
+    variables.color["light-red"],
+    variables.color["light-orange"],
+    variables.color["light-yellow"],
+    variables.color["light-green"],
+    variables.color["light-blue"],
+    variables.color["light-purple"]
+  ];
 
   const { before, after } = data;
   let step = null;
@@ -11,9 +22,13 @@
   $: console.log({ step, data });
 
   onMount(() => {
-    const highlights = document
+    document
       .querySelectorAll(".translation-step")
       .forEach((d) => d.addEventListener("click", onClick));
+
+    document
+      .querySelectorAll(".translation-step")
+      .forEach((d, i) => (d.style.background = colors[i]));
   });
 
   const onClick = (e) => {
@@ -103,13 +118,11 @@
     flex: 1;
   }
   .before {
-    /* background: var(--color-tan); */
     border: 1px solid lightgrey;
     margin-right: 15px;
   }
   .after {
     border: 1px solid lightgrey;
-    /* background: var(--color-orange); */
   }
   ul {
     padding-left: 20px;
@@ -126,8 +139,5 @@
     color: var(--color-gray-dark);
     font-style: italic;
     margin-top: 1em;
-  }
-  :global(.translation-step) {
-    background: rgb(245, 232, 177);
   }
 </style>

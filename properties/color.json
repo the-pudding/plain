@@ -30,20 +30,23 @@
     "green": {
       "value": "#34a29e"
     },
-    "red": {
-      "value": "#ff533d"
+    "light-red": {
+      "value": "#f4cccc"
     },
-    "yellow": {
-      "value": "#e5e338"
+    "light-orange": {
+      "value": "#fce5cd"
     },
-    "orange": {
-      "value": "#F6C672"
+    "light-yellow": {
+      "value": "#fff2cc"
     },
-    "tan": {
-      "value": "#F4E7D7"
+    "light-green": {
+      "value": "#d9ead3"
     },
-    "orange-dark": {
-      "value": "#B26430"
+    "light-blue": {
+      "value": "#cfe2f3"
+    },
+    "light-purple": {
+      "value": "#d9d2e9"
     }
   }
 }

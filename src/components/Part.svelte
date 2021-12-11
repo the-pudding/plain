@@ -12,7 +12,7 @@
 
 <section id="part-{part}">
   <h1>{title}</h1>
-  {#each chunks as { standard, plain, graphic, deepDive, subchunks, description }, i}
+  {#each chunks as { standard, plain, graphic, deepDive, subchunks, description, subtitle }, i}
     {#if deepDive}
       <details>
         <summary>{description}</summary>
@@ -21,7 +21,10 @@
         {/each}
       </details>
     {:else}
-      <Prose {standard} {plain} bind:adjustments {i} />
+      <!-- {#if subtitle}
+        <h3>{subtitle}</h3>
+      {/if} -->
+      <Prose {standard} {plain} bind:adjustments {i} {subtitle} />
     {/if}
 
     {#if graphic}
