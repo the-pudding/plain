@@ -119,7 +119,7 @@
     transition: transform 1s;
   }
   .show-plain {
-    transform: translate(-41%, 0%);
+    transform: translate(-43.6%, 0%);
   }
   .show-standard {
     transform: translate(10%, 0%);
@@ -148,6 +148,7 @@
   .plain {
     color: steelblue;
     font-family: var(--font-plain);
+    font-size: var(--font-size-plain);
   }
   ul {
     padding-left: 1em;

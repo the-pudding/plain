@@ -3,6 +3,7 @@
   import _ from "lodash";
   import Icon from "$components/helpers/Icon.svelte";
   import variables from "$data/variables.json";
+  import { select } from "d3";
 
   export let data;
 
@@ -13,6 +14,14 @@
     variables.color["light-green"],
     variables.color["light-blue"],
     variables.color["light-purple"]
+  ];
+  const positions = [
+    { top: "36%", left: "8%" },
+    { top: "36%", left: "24%" },
+    { top: "44%", left: "16%" },
+    { top: "54%", left: "16%" },
+    { top: "63%", left: "16%" },
+    { top: "30%", left: "16%" }
   ];
 
   const { before, after } = data;
@@ -35,7 +44,10 @@
 
     document.querySelectorAll(".tooltip").forEach((d) => {
       d.style.border = `3px solid ${colors[step]}`;
+      d.style.top = step !== null ? positions[step].top : 0;
+      d.style.left = step !== null ? positions[step].left : 0;
     });
+
     document.querySelectorAll(".close").forEach((d) => {
       d.style.border = `3px solid ${colors[step]}`;
     });
@@ -88,8 +100,8 @@
     display: none;
     position: absolute;
     width: 70%;
-    top: 50%;
-    left: 15%;
+    top: var(--top);
+    left: var(--left);
     background: white;
     padding: 18px;
     box-shadow: 0 0 10px lightgrey;
@@ -100,7 +112,7 @@
     top: 0;
     right: 0;
     line-height: 1;
-    font-size: 1.2em;
+    font-size: 1em;
     -webkit-transform: translate(50%, -50%);
     transform: translate(50%, -50%);
     padding: 0.25em;
@@ -130,6 +142,7 @@
   }
   .after p {
     font-family: var(--font-plain);
+    font-size: var(--font-size-plain);
   }
   ul {
     padding-left: 20px;
@@ -146,5 +159,9 @@
     color: var(--color-gray-dark);
     font-style: italic;
     margin-top: 1em;
+  }
+  :global(.translation-step:hover) {
+    cursor: pointer;
+    font-weight: bold;
   }
 </style>

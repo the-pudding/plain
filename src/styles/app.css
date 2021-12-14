@@ -33,6 +33,7 @@
 
   --column-width: 33em;
   --font-plain: var(--mono);
+  --font-size-plain: 14px;
 }
 
 /* p, li {
