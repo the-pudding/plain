@@ -19,8 +19,6 @@
   let step = null;
   $: description = step !== null ? data.steps[step].description : null;
 
-  $: console.log({ step, data });
-
   onMount(() => {
     document
       .querySelectorAll(".translation-step")
@@ -34,6 +32,13 @@
   const onClick = (e) => {
     const num = e.target.id.replace(/^\D+/g, "");
     step = parseInt(num);
+
+    document.querySelectorAll(".tooltip").forEach((d) => {
+      d.style.border = `3px solid ${colors[step]}`;
+    });
+    document.querySelectorAll(".close").forEach((d) => {
+      d.style.border = `3px solid ${colors[step]}`;
+    });
   };
 </script>
 
@@ -85,7 +90,6 @@
     width: 70%;
     top: 50%;
     left: 15%;
-    border: 1px solid lightgrey;
     background: white;
     padding: 18px;
     box-shadow: 0 0 10px lightgrey;
@@ -96,12 +100,12 @@
     top: 0;
     right: 0;
     line-height: 1;
-    background: lightgrey;
     font-size: 1.2em;
     -webkit-transform: translate(50%, -50%);
     transform: translate(50%, -50%);
     padding: 0.25em;
     pointer-events: all;
+    background: #f5f1f1;
   }
   .close:hover {
     cursor: pointer;

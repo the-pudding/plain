@@ -21,9 +21,6 @@
         {/each}
       </details>
     {:else}
-      <!-- {#if subtitle}
-        <h3>{subtitle}</h3>
-      {/if} -->
       <Prose {standard} {plain} bind:adjustments {i} {subtitle} />
     {/if}
 
@@ -35,10 +32,19 @@
 
 <style>
   section {
-    width: var(--column-width);
+    width: 45em;
     margin: 0 auto;
+  }
+  summary {
+    transform: translate(20%, 0%);
+    width: 30em;
+    font-weight: bold;
   }
   summary:hover {
     cursor: pointer;
+  }
+  h1 {
+    transform: translate(10%, 0%);
+    width: 30em;
   }
 </style>
