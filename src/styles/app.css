@@ -32,6 +32,7 @@
   --color-highlight: var(--color-yellow);
 
   --column-width: 33em;
+  --font-plain: var(--mono);
 }
 
 /* p, li {

@@ -36,7 +36,6 @@
 
       if (noPlain) {
         adjustments[i] = 0;
-        // currentHeight = standardHeight;
         return;
       }
 
@@ -47,10 +46,8 @@
 
       if (view === "standard") {
         adjustments[i] = standardOffset;
-        // currentHeight = standardHeight;
       } else {
         adjustments[i] = plainOffset;
-        // currentHeight = plainHeight;
       }
     }
   };
@@ -138,7 +135,8 @@
   .just-standard ul {
     width: 30em;
   }
-  .text:hover {
+  .standard:hover,
+  .plain:hover {
     cursor: pointer;
   }
   .faded {
@@ -149,6 +147,7 @@
   }
   .plain {
     color: steelblue;
+    font-family: var(--font-plain);
   }
   ul {
     padding-left: 1em;
