@@ -128,6 +128,9 @@
   .after {
     border: 1px solid lightgrey;
   }
+  .after p {
+    font-family: var(--font-plain);
+  }
   ul {
     padding-left: 20px;
   }
