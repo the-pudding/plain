@@ -111,7 +111,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    line-height: 1;
+    line-height: 1em;
     font-size: 1em;
     -webkit-transform: translate(50%, -50%);
     transform: translate(50%, -50%);

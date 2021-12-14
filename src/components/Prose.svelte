@@ -1,6 +1,9 @@
 <script>
   import { onMount } from "svelte";
   import _ from "lodash";
+  import tap from "$svg/tap.svg";
+  import swipe from "$svg/swipe.svg";
+  import { select } from "d3";
 
   export let standard = "";
   export let plain = "";
@@ -52,9 +55,15 @@
     }
   };
 
+  const placeIcons = () => {
+    select("span#tap-icon").html(tap);
+    select("span#swipe-icon").html(swipe);
+  };
+
   onMount(() => {
     mounted = true;
     updateAdjustments();
+    placeIcons();
   });
 </script>
 
