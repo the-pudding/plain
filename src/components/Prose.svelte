@@ -11,7 +11,7 @@
   export let i;
   export let subtitle;
 
-  console.log({ i, standard, plain, subtitle });
+  // console.log({ i, standard, plain, subtitle });
 
   let mounted = false;
   $: noPlain = plain === "";
@@ -26,7 +26,8 @@
     else view = "standard";
   };
 
-  $: view, updateAdjustments();
+  // $: view, updateAdjustments();
+  $: console.log({ adjustments });
 
   const updateAdjustments = () => {
     if (mounted && refs.length > 0) {
@@ -52,8 +53,10 @@
 
       if (view === "standard") {
         adjustments[i] = standardOffset;
+        currentHeight = standardHeight;
       } else {
         adjustments[i] = plainOffset;
+        currentHeight = plainHeight;
       }
     }
   };
@@ -70,12 +73,12 @@
   });
 </script>
 
-<div class="outer" style={`--marginTop: ${marginTop}px`}>
+<div class="outer" class:no-plain={noPlain} style={`--marginTop: ${marginTop}px`}>
   <div
     class:inner={true}
     class:show-plain={view === "plain"}
     class:show-standard={view === "standard"}
-    class:just-standard={noPlain}
+    class:no-plain={noPlain}
     bind:this={containerEl}
   >
     {#if noPlain && !subtitle}
@@ -120,47 +123,90 @@
 
 <style>
   .outer {
-    width: 45em;
+    width: calc(var(--column-width) * 1.4);
     margin: 0 auto;
-    transition: margin-top 1s;
+    transition: margin-top 500ms;
     margin-top: var(--marginTop);
     display: flex;
     overflow: hidden;
     position: relative;
   }
+
+  .outer.no-plain {
+    width: var(--column-width);
+  }
+
+  .outer.no-plain .show-standard {
+    transform: none;
+  }
+
+  .outer.no-plain:before,
+  .outer.no-plain:after {
+    display: none;
+  }
+
+  .outer:before {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 5rem;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(
+      right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 1) 100%
+    );
+    z-index: var(--z-top);
+  }
+
+  .outer:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 5rem;
+    top: 0;
+    right: 0;
+    z-index: var(--z-top);
+    background-image: linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+  }
+
   .inner {
     display: flex;
-    transition: transform 1s;
+    transition: transform 500ms;
   }
+
   .show-plain {
-    transform: translate(-43.6%, 0%);
+    transform: translate(-40%, 0%);
   }
   .show-standard {
     transform: translate(10%, 0%);
   }
 
   .text {
-    width: 30em;
+    width: var(--column-width);
   }
-  .just-standard {
-    transform: translate(19%, 0%);
-  }
+
   h2 {
     transform: translate(-6%, 0%);
   }
-  .just-standard p,
-  .just-standard ul {
+  /* .inner.no-plain p,
+  .inner.no-plain ul {
     width: 30em;
-  }
+  } */
   .standard:hover,
   .plain:hover {
     cursor: pointer;
   }
   .faded {
     opacity: 0.3;
+    max-height: var(--maxHeight);
+    overflow: hidden;
   }
   .standard {
-    margin-right: 1em;
+    padding-right: 1em;
   }
   .plain {
     color: var(--color-dark-blue);

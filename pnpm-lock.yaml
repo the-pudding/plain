@@ -4,29 +4,36 @@ specifiers:
   '@rollup/plugin-dsv': 2.0.2
   '@sveltejs/adapter-static': 1.0.0-next.21
   '@sveltejs/kit': 1.0.0-next.190
-  archieml: 0.4.2
+  archieml: 0.5.0
   autoprefixer: 10.3.7
   d3: 7.1.1
   feather-icons: 4.28.0
+  lodash: ^4.17.21
   lodash.debounce: 4.0.8
   node-fetch: 2.6.2
   postcss: 8.3.11
   prettier: 2.4.1
   prettier-plugin-svelte: 2.4.0
   rollup-plugin-svg: 2.0.0
+  rough-notation: ^0.5.1
   style-dictionary: 3.0.3
   svelte: 3.44.0
   svelte-preprocess: 4.9.8
+  svelte-previous: ^2.0.0
   vite-plugin-svgstring: 1.0.0
+
+dependencies:
+  rough-notation: 0.5.1
 
 devDependencies:
   '@rollup/plugin-dsv': 2.0.2
   '@sveltejs/adapter-static': 1.0.0-next.21
   '@sveltejs/kit': 1.0.0-next.190_svelte@3.44.0
-  archieml: 0.4.2
+  archieml: 0.5.0
   autoprefixer: 10.3.7_postcss@8.3.11
   d3: 7.1.1
   feather-icons: 4.28.0
+  lodash: 4.17.21
   lodash.debounce: 4.0.8
   node-fetch: 2.6.2
   postcss: 8.3.11
@@ -36,6 +43,7 @@ devDependencies:
   style-dictionary: 3.0.3
   svelte: 3.44.0
   svelte-preprocess: 4.9.8_postcss@8.3.11+svelte@3.44.0
+  svelte-previous: 2.0.1
   vite-plugin-svgstring: 1.0.0
 
 packages:
@@ -146,8 +154,8 @@ packages:
       color-convert: 2.0.1
     dev: true
 
-  /archieml/0.4.2:
-    resolution: {integrity: sha1-IeAUwD2RE6kGtoK11K0XFoHnfzY=}
+  /archieml/0.5.0:
+    resolution: {integrity: sha512-HhL+z+8toD2M9b+TijMR/3fmbs6dhWcATBstpQFTCqU4iyqDENznwZ4JRN0w3EkBbUL34jOv3PJK5/45VF9hJA==}
     dev: true
 
   /autoprefixer/10.3.7_postcss@8.3.11:
@@ -1084,6 +1092,10 @@ packages:
       fsevents: 2.3.2
     dev: true
 
+  /rough-notation/0.5.1:
+    resolution: {integrity: sha512-ITHofTzm13cWFVfoGsh/4c/k2Mg8geKgBCwex71UZLnNuw403tCRjYPQ68jSAd37DMbZIePXPjDgY0XdZi9HPw==}
+    dev: false
+
   /rw/1.3.3:
     resolution: {integrity: sha1-P4Yt+pGrdmsUiF700BEkv9oHT7Q=}
     dev: true
@@ -1228,6 +1240,10 @@ packages:
       sorcery: 0.10.0
       strip-indent: 3.0.0
       svelte: 3.44.0
+    dev: true
+
+  /svelte-previous/2.0.1:
+    resolution: {integrity: sha512-SoYr4OeEKfcdwhs5uNEGLNcD6lNp/bVt1TYjymgH2TzJ4U0oDMjW+4dQpgOWIZnYmmSM+h3H0XXlAuAYwI35KQ==}
     dev: true
 
   /svelte/3.44.0:

@@ -6,8 +6,6 @@
   import copy from "$data/doc.json";
 
   setContext("App", { copy });
-
-  console.log(copy);
 </script>
 
 <Intro />

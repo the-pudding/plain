@@ -31,9 +31,19 @@
   --color-selection: var(--color-gray-light);
   --color-highlight: var(--color-yellow);
 
-  --column-width: 33em;
+  --column-width: 30rem;
   --font-plain: var(--mono);
-  --font-size-plain: 14px;
+  --font-size-plain: 0.9em;
+}
+
+p {
+	line-height: 1.6;
+}
+
+@media only screen and (min-width: 800px) {
+	body {
+		font-size: 20px;
+	}
 }
 
 /* p, li {

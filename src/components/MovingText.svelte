@@ -113,7 +113,7 @@
 <style>
   .container {
     position: relative;
-    font-size: 40px;
+    font-size: 3em;
     background: var(--color-tan);
   }
   .spacer {
@@ -124,7 +124,7 @@
     position: absolute;
     top: 0;
     padding: 20px;
-    max-width: var(--column-width);
+    /* max-width: var(--column-width); */
   }
   .word {
     position: absolute;

@@ -11,7 +11,7 @@
 </script>
 
 <section id="part-{part}">
-  <h1>{title}</h1>
+  <h2>{title}</h2>
   {#each chunks as { standard, plain, graphic, deepDive, subchunks, description, subtitle }, i}
     {#if deepDive}
       <details>
@@ -32,9 +32,10 @@
 
 <style>
   section {
-    width: 45em;
+    max-width: 80rem;
     margin: 0 auto;
   }
+
   summary {
     transform: translate(20%, 0%);
     width: 30em;
@@ -43,8 +44,8 @@
   summary:hover {
     cursor: pointer;
   }
-  h1 {
-    transform: translate(10%, 0%);
-    width: 30em;
+  h2 {
+    max-width: var(--column-width);
+    margin: 0 auto;
   }
 </style>
