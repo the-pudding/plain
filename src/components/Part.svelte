@@ -6,8 +6,6 @@
   export let part;
   export let chunks;
   export let title;
-
-  let adjustments = _.times(chunks.length, _.constant(0));
 </script>
 
 <section id="part-{part}">
@@ -17,11 +15,11 @@
       <details>
         <summary>{description}</summary>
         {#each subchunks as subchunk}
-          <Prose standard={subchunk.standard} plain={subchunk.plain} bind:adjustments {i} />
+          <Prose standard={subchunk.standard} plain={subchunk.plain} />
         {/each}
       </details>
     {:else}
-      <Prose {standard} {plain} bind:adjustments {i} {subtitle} />
+      <Prose {standard} {plain} {subtitle} />
     {/if}
 
     {#if graphic}

@@ -93,7 +93,6 @@
     margin-bottom: 4em;
     display: flex;
     flex-direction: column;
-    font-size: 16px;
     position: relative;
   }
   .tooltip {

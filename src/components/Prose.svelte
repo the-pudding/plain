@@ -7,57 +7,38 @@
 
   export let standard = "";
   export let plain = "";
-  export let adjustments;
-  export let i;
   export let subtitle;
-
-  // console.log({ i, standard, plain, subtitle });
 
   let mounted = false;
   $: noPlain = plain === "";
   let view = "standard";
-  let containerEl;
+  let outerEl;
   let refs = [];
   let currentHeight = 0;
-  $: marginTop = i === 0 ? 0 : adjustments[i - 1] * -1;
 
   const switchView = () => {
     if (view === "standard") view = "plain";
     else view = "standard";
   };
 
-  // $: view, updateAdjustments();
-  $: console.log({ adjustments });
+  $: view, updateHeights();
+  const getHeights = (d) => {
+    const heightWithoutMargin = d.getBoundingClientRect().height;
+    const formatPx = (str) => parseFloat(str.replace("px"));
+    const margin =
+      formatPx(window.getComputedStyle(d).getPropertyValue("margin-top")) +
+      formatPx(window.getComputedStyle(d).getPropertyValue("margin-bottom"));
+    return heightWithoutMargin + margin;
+  };
 
-  const updateAdjustments = () => {
-    if (mounted && refs.length > 0) {
-      const getHeights = (d) => {
-        const heightWithoutMargin = d.getBoundingClientRect().height;
-        const formatPx = (str) => parseFloat(str.replace("px"));
-        const margin =
-          formatPx(window.getComputedStyle(d).getPropertyValue("margin-top")) +
-          formatPx(window.getComputedStyle(d).getPropertyValue("margin-bottom"));
-        return heightWithoutMargin + margin;
-      };
+  const updateHeights = () => {
+    if (mounted && !noPlain) {
       const standardHeight = _.sum(Array.from(refs[0].children).map(getHeights));
-
-      if (noPlain) {
-        adjustments[i] = 0;
-        return;
-      }
-
       const plainHeight = _.sum(Array.from(refs[1].children).map(getHeights));
-      const containerHeight = containerEl.getBoundingClientRect().height;
-      const standardOffset = containerHeight - standardHeight;
-      const plainOffset = containerHeight - plainHeight;
+      if (view === "standard") currentHeight = standardHeight;
+      else if (view === "plain") currentHeight = plainHeight;
 
-      if (view === "standard") {
-        adjustments[i] = standardOffset;
-        currentHeight = standardHeight;
-      } else {
-        adjustments[i] = plainOffset;
-        currentHeight = plainHeight;
-      }
+      select(outerEl).style("max-height", `${currentHeight}px`);
     }
   };
 
@@ -68,18 +49,17 @@
 
   onMount(() => {
     mounted = true;
-    updateAdjustments();
+    updateHeights();
     placeIcons();
   });
 </script>
 
-<div class="outer" class:no-plain={noPlain} style={`--marginTop: ${marginTop}px`}>
+<div class:outer={true} class:no-plain={noPlain} bind:this={outerEl}>
   <div
     class:inner={true}
     class:show-plain={view === "plain"}
     class:show-standard={view === "standard"}
     class:no-plain={noPlain}
-    bind:this={containerEl}
   >
     {#if noPlain && !subtitle}
       {#each standard as { type, value }}
@@ -123,9 +103,9 @@
 
 <style>
   .outer {
-    width: calc(var(--column-width) * 1.4);
+    width: calc(var(--column-width) * 1.6);
     margin: 0 auto;
-    transition: margin-top 500ms;
+    transition: margin-top 500ms, max-height 500ms;
     margin-top: var(--marginTop);
     display: flex;
     overflow: hidden;
@@ -179,10 +159,10 @@
   }
 
   .show-plain {
-    transform: translate(-40%, 0%);
+    transform: translate(-35%, 0%);
   }
   .show-standard {
-    transform: translate(10%, 0%);
+    transform: translate(15%, 0%);
   }
 
   .text {
@@ -192,10 +172,6 @@
   h2 {
     transform: translate(-6%, 0%);
   }
-  /* .inner.no-plain p,
-  .inner.no-plain ul {
-    width: 30em;
-  } */
   .standard:hover,
   .plain:hover {
     cursor: pointer;
