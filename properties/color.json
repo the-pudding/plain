@@ -30,26 +30,32 @@
     "green": {
       "value": "#34a29e"
     },
-    "light-red": {
+    "comment-red": {
       "value": "#f4cccc"
     },
-    "light-orange": {
+    "comment-orange": {
       "value": "#fce5cd"
     },
-    "light-yellow": {
+    "comment-yellow": {
       "value": "#fff2cc"
     },
-    "light-green": {
+    "comment-green": {
       "value": "#d9ead3"
     },
-    "light-blue": {
+    "comment-blue": {
       "value": "#cfe2f3"
     },
-    "light-purple": {
+    "comment-purple": {
       "value": "#d9d2e9"
     },
     "tan": {
       "value": "#F4E7D7"
+    },
+    "light-blue": {
+      "value": "#f0f8ff"
+    },
+    "dark-blue": {
+      "value": "#4682b4"
     }
   }
 }

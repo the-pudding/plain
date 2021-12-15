@@ -8,12 +8,12 @@
   export let data;
 
   const colors = [
-    variables.color["light-red"],
-    variables.color["light-orange"],
-    variables.color["light-yellow"],
-    variables.color["light-green"],
-    variables.color["light-blue"],
-    variables.color["light-purple"]
+    variables.color["comment-red"],
+    variables.color["comment-orange"],
+    variables.color["comment-yellow"],
+    variables.color["comment-green"],
+    variables.color["comment-blue"],
+    variables.color["comment-purple"]
   ];
   const positions = [
     { top: "36%", left: "8%" },

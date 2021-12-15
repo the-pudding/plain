@@ -19,12 +19,14 @@
     "purple": "#a239ca",
     "blue": "#4717f6",
     "green": "#34a29e",
-    "light-red": "#f4cccc",
-    "light-orange": "#fce5cd",
-    "light-yellow": "#fff2cc",
-    "light-green": "#d9ead3",
-    "light-blue": "#cfe2f3",
-    "light-purple": "#d9d2e9",
-    "tan": "#F4E7D7"
+    "comment-red": "#f4cccc",
+    "comment-orange": "#fce5cd",
+    "comment-yellow": "#fff2cc",
+    "comment-green": "#d9ead3",
+    "comment-blue": "#cfe2f3",
+    "comment-purple": "#d9d2e9",
+    "tan": "#F4E7D7",
+    "light-blue": "#f0f8ff",
+    "dark-blue": "#4682b4"
   }
 }

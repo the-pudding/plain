@@ -113,7 +113,7 @@
 <style>
   .container {
     position: relative;
-    font-size: 26px;
+    font-size: 40px;
     background: var(--color-tan);
   }
   .spacer {

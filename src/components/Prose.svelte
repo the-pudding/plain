@@ -9,9 +9,12 @@
   export let plain = "";
   export let adjustments;
   export let i;
+  export let subtitle;
+
+  console.log({ i, standard, plain, subtitle });
 
   let mounted = false;
-  let noPlain = plain === "";
+  $: noPlain = plain === "";
   let view = "standard";
   let containerEl;
   let refs = [];
@@ -72,10 +75,10 @@
     class:inner={true}
     class:show-plain={view === "plain"}
     class:show-standard={view === "standard"}
-    class:just-standard={plain === ""}
+    class:just-standard={noPlain}
     bind:this={containerEl}
   >
-    {#if plain === ""}
+    {#if noPlain && !subtitle}
       {#each standard as { type, value }}
         {#if type === "text"}
           <p class="text">{@html value}</p>
@@ -87,6 +90,8 @@
           </ul>
         {/if}
       {/each}
+    {:else if noPlain && subtitle}
+      <h2 class="text">{subtitle}</h2>
     {:else}
       {#each ["standard", "plain"] as v, i}
         <div
@@ -138,7 +143,10 @@
     width: 30em;
   }
   .just-standard {
-    transform: translate(20%, 0%);
+    transform: translate(19%, 0%);
+  }
+  h2 {
+    transform: translate(-6%, 0%);
   }
   .just-standard p,
   .just-standard ul {
@@ -155,7 +163,7 @@
     margin-right: 1em;
   }
   .plain {
-    color: steelblue;
+    color: var(--color-dark-blue);
     font-family: var(--font-plain);
     font-size: var(--font-size-plain);
   }

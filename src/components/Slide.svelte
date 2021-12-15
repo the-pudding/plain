@@ -36,7 +36,7 @@
     font-weight: bold;
   }
   .container {
-    max-width: var(--column-width);
+    /* background: var(--color-light-blue); */
     margin: 0 auto;
     margin-top: 4em;
     margin-bottom: 6em;
