@@ -1,9 +1,20 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, getContext } from "svelte";
   import _ from "lodash";
   import tap from "$svg/tap.svg";
   import swipe from "$svg/swipe.svg";
   import { select } from "d3";
+  import { toggle } from "$stores/misc.js";
+
+  $: $toggle, toggleChange();
+
+  const toggleChange = () => {
+    if ($toggle === "on") {
+      view = "plain";
+    } else if ($toggle === "off") {
+      view = "standard";
+    }
+  };
 
   export let standard = "";
   export let plain = "";
@@ -57,24 +68,23 @@
 <div class:outer={true} class:no-plain={noPlain} bind:this={outerEl}>
   <div
     class:inner={true}
-    class:show-plain={view === "plain"}
-    class:show-standard={view === "standard"}
-    class:no-plain={noPlain}
+    class:show-plain={view === "plain" && !noPlain}
+    class:show-standard={view === "standard" && !noPlain}
   >
-    {#if noPlain && !subtitle}
+    {#if subtitle}
+      <h2 class="text">{subtitle}</h2>
+    {:else if noPlain}
       {#each standard as { type, value }}
         {#if type === "text"}
-          <p class="text">{@html value}</p>
+          <p>{@html value}</p>
         {:else if type === "list"}
-          <ul class="text">
+          <ul>
             {#each value as v}
               <li>{@html v}</li>
             {/each}
           </ul>
         {/if}
       {/each}
-    {:else if noPlain && subtitle}
-      <h2 class="text">{subtitle}</h2>
     {:else}
       {#each ["standard", "plain"] as v, i}
         <div
@@ -130,7 +140,7 @@
     display: block;
     position: absolute;
     height: 100%;
-    width: 5rem;
+    width: 2rem;
     top: 0;
     left: 0;
     background-image: linear-gradient(
@@ -146,7 +156,7 @@
     display: block;
     position: absolute;
     height: 100%;
-    width: 5rem;
+    width: 2rem;
     top: 0;
     right: 0;
     z-index: var(--z-top);
