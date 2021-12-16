@@ -44,17 +44,8 @@
 
   const updateHeights = () => {
     if (mounted && !noPlain) {
-      console.log("updateHeights");
       const standardHeight = _.sum(Array.from(refs[0].children).map(getHeights));
       const plainHeight = _.sum(Array.from(refs[1].children).map(getHeights));
-
-      if (
-        _.startsWith(standard[0].value, "When doing a") ||
-        _.startsWith(standard[0].value, "Once I start translating") ||
-        _.startsWith(standard[0].value, "In the first sentence of the translation")
-      ) {
-        console.log({ standard, standardHeight, plain, plainHeight });
-      }
 
       if (view === "standard") currentHeight = standardHeight;
       else if (view === "plain") currentHeight = plainHeight;
