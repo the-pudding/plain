@@ -13,12 +13,13 @@
     variables.color["comment-blue"],
     variables.color["comment-purple"]
   ];
+  const placeholder = "Click the highlighted text to see Rebecca's comments.";
 
-  const { before, after } = data;
+  const { before, after, title } = data;
   let mounted = false;
   let step = null;
   let hoveredStep = null;
-  $: description = step !== null ? data.steps[step].description : null;
+  $: description = step !== null ? data.steps[step].description : placeholder;
 
   $: hoveredStep, hoverChange();
   const hoverChange = () => {
@@ -78,14 +79,15 @@
   };
 </script>
 
+<h3>{title}</h3>
 <div class="container">
   <div class="texts">
     <div class="before">
-      <h3>ORIGINAL</h3>
+      <p class="head">ORIGINAL</p>
       <p>{@html before}</p>
     </div>
     <div class="after">
-      <h3>PLAIN LANGUAGE</h3>
+      <p class="head">PLAIN LANGUAGE</p>
       <p>{@html after}</p>
     </div>
   </div>
@@ -99,11 +101,20 @@
     max-width: 1100px;
     width: calc(100% - 80px);
     margin: 0 auto;
-    margin-top: 3rem;
-    margin-bottom: 4em;
     display: flex;
     flex-direction: column;
     position: relative;
+  }
+  .head {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  h3 {
+    max-width: 1100px;
+    width: calc(100% - 80px);
+    margin: 0 auto;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
   }
   .texts {
     display: flex;
@@ -127,18 +138,14 @@
   p {
     margin: 0;
   }
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0.5em;
-  }
   .description {
     color: var(--color-gray-dark);
     font-style: italic;
     display: flex;
     align-items: flex-start;
     opacity: 0;
-    margin-bottom: 1em;
-    margin-top: 2rem;
+    margin-bottom: 2em;
+    margin-top: 3rem;
   }
   .show-description {
     opacity: 1;

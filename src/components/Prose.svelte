@@ -1,5 +1,5 @@
 <script>
-  import { onMount, getContext } from "svelte";
+  import { onMount, tick } from "svelte";
   import _ from "lodash";
   import tap from "$svg/tap.svg";
   import swipe from "$svg/swipe.svg";
@@ -44,8 +44,18 @@
 
   const updateHeights = () => {
     if (mounted && !noPlain) {
+      console.log("updateHeights");
       const standardHeight = _.sum(Array.from(refs[0].children).map(getHeights));
       const plainHeight = _.sum(Array.from(refs[1].children).map(getHeights));
+
+      if (
+        _.startsWith(standard[0].value, "When doing a") ||
+        _.startsWith(standard[0].value, "Once I start translating") ||
+        _.startsWith(standard[0].value, "In the first sentence of the translation")
+      ) {
+        console.log({ standard, standardHeight, plain, plainHeight });
+      }
+
       if (view === "standard") currentHeight = standardHeight;
       else if (view === "plain") currentHeight = plainHeight;
 
@@ -58,7 +68,7 @@
     select("span#swipe-icon").html(swipe);
   };
 
-  onMount(() => {
+  onMount(async () => {
     mounted = true;
     updateHeights();
     placeIcons();
@@ -72,7 +82,7 @@
     class:show-standard={view === "standard" && !noPlain}
   >
     {#if subtitle}
-      <h2 class="text">{subtitle}</h2>
+      <h3 class="text">{subtitle}</h3>
     {:else if noPlain}
       {#each standard as { type, value }}
         {#if type === "text"}
@@ -209,5 +219,8 @@
   }
   ul {
     padding-left: 1em;
+  }
+  h3 {
+    margin-top: 2em;
   }
 </style>

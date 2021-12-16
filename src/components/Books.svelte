@@ -3,15 +3,13 @@
     {
       img: "grapes.jpeg",
       alt: "the grapes of wrath cover",
-      size: "small",
       score: 680,
       grade: "5th grade"
     },
-    { img: "twilight.jpeg", alt: "twilight cover", size: "medium", score: 720, grade: "7th grade" },
+    { img: "twilight.jpeg", alt: "twilight cover", score: 720, grade: "7th grade" },
     {
       img: "mouse.jpeg",
       alt: "the library mouse cover",
-      size: "large",
       score: 860,
       grade: "10th grade"
     }
@@ -23,7 +21,7 @@
     <div class="book">
       <img src={`assets/img/${img}`} {alt} class={size} />
       <div class="score">{score}</div>
-      <div>({grade})</div>
+      <div class="grade">({grade})</div>
     </div>
   {/each}
 </div>
@@ -31,22 +29,25 @@
 <style>
   .container {
     display: flex;
-    max-width: var(--column-width);
-    margin: 0 auto;
+    justify-content: space-evenly;
+    max-width: 1100px;
+    width: calc(100% - 80px);
+    margin: auto;
     margin-top: 4em;
     margin-bottom: 4em;
   }
-  img.small {
-    height: 150px;
-    margin-right: 1em;
-  }
-  img.medium {
-    height: 200px;
-    margin-right: 1em;
-  }
-  img.large {
+
+  img {
     height: 250px;
+    margin-bottom: 0.5em;
+    transform: scale(1);
+    transition: all 500ms;
   }
+  img:hover {
+    transform: scale(1.2);
+    margin-bottom: 2em;
+  }
+
   .book {
     display: flex;
     flex-direction: column;
@@ -55,6 +56,9 @@
   }
   .score {
     font-weight: bold;
-    font-size: 22px;
+    font-size: 30px;
+  }
+  .grade {
+    font-size: 16px;
   }
 </style>

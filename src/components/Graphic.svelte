@@ -7,16 +7,13 @@
   export let graphic;
 </script>
 
-{#if graphic.name === "in-action"}
-  <SideBySide data={graphic} />
-{:else if graphic.name === "characteristics"}
-  <SideBySide data={graphic} pen={true} />
-{:else if graphic.name === "translation"}
+{#if graphic.name === "translation"}
   <SideBySide data={graphic} />
 {:else if graphic.name === "steps"}
   <Comments data={graphic} />
 {:else if graphic.name === "flesch" || graphic.name === "dale"}
   <Slide
+    title={graphic.title}
     progression={graphic.progression}
     algorithm={graphic.name === "flesch"
       ? "Flesch-Kincaid"

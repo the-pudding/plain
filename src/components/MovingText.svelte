@@ -114,7 +114,7 @@
   .container {
     position: relative;
     font-size: 3em;
-    background: var(--color-tan);
+    background: #f3f1f1;
   }
   .spacer {
     padding: 20px;

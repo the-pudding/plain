@@ -6,13 +6,15 @@
   export let part;
   export let chunks;
   export let title;
+
+  let open = "false";
 </script>
 
 <section id="part-{part}">
   <h2>{title}</h2>
   {#each chunks as { standard, plain, graphic, deepDive, subchunks, description, subtitle }, i}
     {#if deepDive}
-      <details>
+      <details open>
         <summary>{description}</summary>
         {#each subchunks as subchunk}
           <Prose standard={subchunk.standard} plain={subchunk.plain} />
@@ -34,15 +36,21 @@
     margin: 0 auto;
   }
   details {
-    width: var(--column-width);
-    max-width: 80rem;
-    margin: 0 auto;
+    font-size: 16px;
+    max-width: 1100px;
+    margin: auto;
+    width: calc(100% - 80px);
   }
   summary {
     font-weight: bold;
   }
   summary:hover {
     cursor: pointer;
+  }
+  .invisible {
+    opacity: 0;
+    position: absolute;
+    top: 0;
   }
   h2 {
     max-width: var(--column-width);

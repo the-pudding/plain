@@ -66,6 +66,7 @@
   .legend {
     padding-right: 0.5em;
     font-size: 1em;
+    font-style: italic;
   }
 
   .options {
@@ -107,6 +108,10 @@
   input[type="radio"] + label {
     background: var(--color-white);
     color: var(--color-off-black);
+  }
+
+  input[type="radio"]:checked + label {
+    background: var(--color-comment-red) !important;
   }
 
   input[type="radio"]:checked + label,
