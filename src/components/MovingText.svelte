@@ -73,7 +73,7 @@
 </script>
 
 <div class="container">
-  <div class="spacer">{text[1]}</div>
+  <div class="spacer">{text[level]}</div>
   <div class="text hide">
     {#each wordsWithPunc(text[0]) as word}
       <span id={`${algorithm}-${stripPunc(word)}-0`}>{word} </span>
