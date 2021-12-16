@@ -2,12 +2,20 @@
   import _ from "lodash";
   import Prose from "$components/Prose.svelte";
   import Graphic from "$components/Graphic.svelte";
+  import { onMount } from "svelte";
 
   export let part;
   export let chunks;
   export let title;
 
-  let open = "false";
+  // hack to get deep dive sizes right
+  onMount(() => {
+    setTimeout(() => {
+      document.querySelectorAll("details").forEach((d, i) => {
+        d.removeAttribute("open");
+      });
+    }, 500);
+  });
 </script>
 
 <section id="part-{part}">

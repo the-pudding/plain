@@ -1,5 +1,5 @@
 <script>
-  import { getContext, onMount, onDestroy } from "svelte";
+  import { getContext, onDestroy } from "svelte";
 
   const { copy } = getContext("App");
 
