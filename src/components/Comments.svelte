@@ -18,6 +18,7 @@
   const { before, after, title } = data;
   let mounted = false;
   let step = null;
+  let inContainer = false;
   let hoveredStep = null;
   $: description = step !== null ? data.steps[step].description : placeholder;
 
@@ -54,12 +55,20 @@
       });
     }
   };
-
   const onMouseEnter = (e) => {
     const num = parseInt(e.target.id.replace(/^\D+/g, ""));
     hoveredStep = num;
   };
-  const onMouseLeave = (e) => {
+  const onMouseLeave = () => {
+    if (!inContainer) {
+      hoveredStep = null;
+    }
+  };
+  const enterContainer = () => {
+    inContainer = true;
+  };
+  const exitContainer = () => {
+    inContainer = false;
     hoveredStep = null;
   };
 
@@ -82,7 +91,7 @@
 <h3>{title}</h3>
 <div class="container">
   <div class="texts">
-    <div class="before">
+    <div class="before" on:mouseenter={enterContainer} on:mouseleave={exitContainer}>
       <p class="head">ORIGINAL</p>
       <p>{@html before}</p>
     </div>
