@@ -79,9 +79,6 @@
 </script>
 
 <div class="container">
-  <div class="description" class:show-description={!!description}>
-    <div class="description-inner">{@html description}</div>
-  </div>
   <div class="texts">
     <div class="before">
       <h3>ORIGINAL</h3>
@@ -92,13 +89,17 @@
       <p>{@html after}</p>
     </div>
   </div>
+  <div class="description" class:show-description={!!description}>
+    <div class="description-inner">{@html description}</div>
+  </div>
 </div>
 
 <style>
   .container {
-    max-width: calc(var(--column-width) * 1.2);
+    max-width: 1100px;
+    width: calc(100% - 80px);
     margin: 0 auto;
-    margin-top: 0px;
+    margin-top: 3rem;
     margin-bottom: 4em;
     display: flex;
     flex-direction: column;
@@ -123,14 +124,10 @@
     font-family: var(--font-plain);
     font-size: var(--font-size-plain);
   }
-  ul {
-    padding-left: 20px;
-  }
   p {
     margin: 0;
   }
   h3 {
-    font-weight: bold;
     margin-top: 0;
     margin-bottom: 0.5em;
   }
@@ -138,10 +135,10 @@
     color: var(--color-gray-dark);
     font-style: italic;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     opacity: 0;
-    height: 200px;
     margin-bottom: 1em;
+    margin-top: 2rem;
   }
   .show-description {
     opacity: 1;

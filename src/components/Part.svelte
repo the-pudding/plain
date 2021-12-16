@@ -47,5 +47,7 @@
   h2 {
     max-width: var(--column-width);
     margin: 0 auto;
+    margin-bottom: 1rem;
+    margin-top: 4rem;
   }
 </style>
