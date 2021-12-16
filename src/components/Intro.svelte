@@ -15,7 +15,7 @@
 </script>
 
 <section id="intro">
-  <div>
+  <div class="container">
     <h1>{@html copy.hed}</h1>
     <div class="outer">
       <div class={`inner slide-${side}`}>
@@ -28,8 +28,8 @@
 </section>
 
 <style>
-  div {
-    max-width: var(--intro-column-width);
+  .container {
+    max-width: 60rem;
     margin: 4rem auto;
   }
   h1 {
@@ -48,7 +48,7 @@
   .plain-dek {
     font-size: var(--heading-font-size);
     text-align: center;
-    width: 580px;
+    width: var(--column-width);
     margin: 0 auto;
     margin-bottom: 0rem;
     transition: opacity 500ms;
@@ -64,7 +64,7 @@
   }
 
   .outer {
-    width: 600px;
+    width: calc(var(--column-width) * 1.6);
     margin: 0 auto;
     transition: margin-top 500ms, height 500ms;
     margin-top: var(--marginTop);
@@ -75,12 +75,13 @@
   .inner {
     display: flex;
     transition: transform 1000ms;
+    margin: 4rem auto;
   }
   .slide-left {
-    transform: translate(56px, 0);
+    transform: translate(15%, 0);
   }
   .slide-right {
-    transform: translate(-410px, 0);
+    transform: translate(-35%, 0);
   }
   .outer:before {
     content: "";
