@@ -4,11 +4,11 @@
 
   const { copy } = getContext("App");
 
-  onMount(() => {
-    const el = document.querySelector("span#circle-header");
-    const annotation = annotate(el, { type: "circle", color: "red", animate: true });
-    annotation.show();
-  });
+  // onMount(() => {
+  //   const el = document.querySelector("span#circle-header");
+  //   const annotation = annotate(el, { type: "circle", color: "red", animate: true });
+  //   annotation.show();
+  // });
 </script>
 
 <section id="intro">

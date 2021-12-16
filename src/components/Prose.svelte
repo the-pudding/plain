@@ -38,7 +38,7 @@
       if (view === "standard") currentHeight = standardHeight;
       else if (view === "plain") currentHeight = plainHeight;
 
-      select(outerEl).style("max-height", `${currentHeight}px`);
+      select(outerEl).style("height", `${currentHeight}px`);
     }
   };
 
@@ -105,7 +105,7 @@
   .outer {
     width: calc(var(--column-width) * 1.6);
     margin: 0 auto;
-    transition: margin-top 500ms, max-height 500ms;
+    transition: margin-top 500ms, height 500ms;
     margin-top: var(--marginTop);
     display: flex;
     overflow: hidden;
@@ -167,10 +167,7 @@
 
   .text {
     width: var(--column-width);
-  }
-
-  h2 {
-    transform: translate(-6%, 0%);
+    transition: opacity 500ms;
   }
   .standard:hover,
   .plain:hover {
@@ -180,6 +177,16 @@
     opacity: 0.3;
     max-height: var(--maxHeight);
     overflow: hidden;
+  }
+  .faded:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 10rem;
+    width: 50%;
+    bottom: 0;
+    z-index: var(--z-top);
+    background-image: linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
   }
   .standard {
     padding-right: 1em;
@@ -191,10 +198,5 @@
   }
   ul {
     padding-left: 1em;
-  }
-
-  figure {
-    height: 25vh;
-    background: aquamarine;
   }
 </style>

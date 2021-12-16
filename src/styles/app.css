@@ -37,15 +37,11 @@
 }
 
 p {
-	line-height: 1.6;
+  line-height: 1.6;
 }
 
 @media only screen and (min-width: 800px) {
-	body {
-		font-size: 20px;
-	}
+  body {
+    font-size: 20px;
+  }
 }
-
-/* p, li {
-	font-size: 18px;
-} */

@@ -33,10 +33,12 @@
     max-width: 80rem;
     margin: 0 auto;
   }
-
+  details {
+    width: var(--column-width);
+    max-width: 80rem;
+    margin: 0 auto;
+  }
   summary {
-    transform: translate(20%, 0%);
-    width: 30em;
     font-weight: bold;
   }
   summary:hover {

@@ -1,9 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import _ from "lodash";
-  import Icon from "$components/helpers/Icon.svelte";
   import variables from "$data/variables.json";
-  import { select } from "d3";
 
   export let data;
 
@@ -15,49 +13,74 @@
     variables.color["comment-blue"],
     variables.color["comment-purple"]
   ];
-  const positions = [
-    { top: "36%", left: "8%" },
-    { top: "36%", left: "24%" },
-    { top: "44%", left: "16%" },
-    { top: "54%", left: "16%" },
-    { top: "63%", left: "16%" },
-    { top: "30%", left: "16%" }
-  ];
 
   const { before, after } = data;
+  let mounted = false;
   let step = null;
+  let hoveredStep = null;
   $: description = step !== null ? data.steps[step].description : null;
 
-  onMount(() => {
-    document
-      .querySelectorAll(".translation-step")
-      .forEach((d) => d.addEventListener("click", onClick));
+  $: hoveredStep, hoverChange();
+  const hoverChange = () => {
+    if (mounted) {
+      document.querySelectorAll(".translation-step").forEach((d, i) => {
+        const num = parseInt(d.id.replace(/^\D+/g, ""));
+        if (hoveredStep !== null) {
+          if (num !== hoveredStep) {
+            d.classList.add("fade");
+          } else {
+            d.classList.remove("fade");
+          }
+        } else {
+          d.classList.remove("fade");
+        }
+      });
 
-    document
-      .querySelectorAll(".translation-step")
-      .forEach((d, i) => (d.style.background = colors[i]));
+      document.querySelectorAll(".after-step").forEach((d, i) => {
+        const num = parseInt(d.id.replace(/^\D+/g, ""));
+        if (hoveredStep !== null) {
+          if (num !== hoveredStep) {
+            d.classList.add("fade");
+            d.style.outline = "none";
+          } else {
+            d.classList.remove("fade");
+            d.style.outline = `3px solid ${colors[i]}`;
+          }
+        } else {
+          d.classList.remove("fade");
+          d.style.outline = "none";
+        }
+      });
+    }
+  };
+
+  const onMouseEnter = (e) => {
+    const num = parseInt(e.target.id.replace(/^\D+/g, ""));
+    hoveredStep = num;
+  };
+  const onMouseLeave = (e) => {
+    hoveredStep = null;
+  };
+
+  onMount(() => {
+    mounted = true;
+    document.querySelectorAll(".translation-step").forEach((d, i) => {
+      d.addEventListener("click", onClick);
+      d.addEventListener("mouseenter", onMouseEnter);
+      d.addEventListener("mouseleave", onMouseLeave);
+      d.style.background = colors[i];
+    });
   });
 
   const onClick = (e) => {
-    const num = e.target.id.replace(/^\D+/g, "");
-    step = parseInt(num);
-
-    document.querySelectorAll(".tooltip").forEach((d) => {
-      d.style.border = `3px solid ${colors[step]}`;
-      d.style.top = step !== null ? positions[step].top : 0;
-      d.style.left = step !== null ? positions[step].left : 0;
-    });
-
-    document.querySelectorAll(".close").forEach((d) => {
-      d.style.border = `3px solid ${colors[step]}`;
-    });
+    const num = parseInt(e.target.id.replace(/^\D+/g, ""));
+    step = num;
   };
 </script>
 
 <div class="container">
-  <div class="tooltip" class:view-tooltip={step !== null}>
-    {description}
-    <div class="close" on:click={() => (step = null)}><Icon name="x" /></div>
+  <div class="description" class:show-description={!!description}>
+    <div class="description-inner">{@html description}</div>
   </div>
   <div class="texts">
     <div class="before">
@@ -66,63 +89,20 @@
     </div>
     <div class="after">
       <h3>PLAIN LANGUAGE</h3>
-      {#if typeof after === "string"}
-        <p>{@html after}</p>
-      {:else}
-        {#each after as { type, value }}
-          {#if type === "text"}
-            <p>{@html value}</p>
-          {:else if type === "list"}
-            <ul>
-              {#each value as v}
-                <li>{@html v}</li>
-              {/each}
-            </ul>
-          {/if}
-        {/each}
-      {/if}
+      <p>{@html after}</p>
     </div>
   </div>
 </div>
 
 <style>
   .container {
-    max-width: var(--column-width);
+    max-width: calc(var(--column-width) * 1.2);
     margin: 0 auto;
-    margin-top: 4em;
+    margin-top: 0px;
     margin-bottom: 4em;
     display: flex;
     flex-direction: column;
     position: relative;
-  }
-  .tooltip {
-    display: none;
-    position: absolute;
-    width: 70%;
-    top: var(--top);
-    left: var(--left);
-    background: white;
-    padding: 18px;
-    box-shadow: 0 0 10px lightgrey;
-    border-radius: 10px;
-  }
-  .close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    line-height: 1em;
-    font-size: 1em;
-    -webkit-transform: translate(50%, -50%);
-    transform: translate(50%, -50%);
-    padding: 0.25em;
-    pointer-events: all;
-    background: #f5f1f1;
-  }
-  .close:hover {
-    cursor: pointer;
-  }
-  .view-tooltip {
-    display: block;
   }
   .texts {
     display: flex;
@@ -157,10 +137,19 @@
   .description {
     color: var(--color-gray-dark);
     font-style: italic;
-    margin-top: 1em;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    height: 200px;
+    margin-bottom: 1em;
+  }
+  .show-description {
+    opacity: 1;
+  }
+  :global(.fade) {
+    opacity: 0.2;
   }
   :global(.translation-step:hover) {
     cursor: pointer;
-    font-weight: bold;
   }
 </style>
