@@ -22,5 +22,5 @@
       : null}
   />
 {:else if graphic.name === "books"}
-  <Books />
+  <Books title={graphic.title} />
 {/if}

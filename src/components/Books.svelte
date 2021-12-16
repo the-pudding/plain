@@ -1,4 +1,6 @@
 <script>
+  export let title;
+
   const data = [
     {
       img: "grapes.jpeg",
@@ -17,26 +19,36 @@
 </script>
 
 <div class="container">
-  {#each data as { img, alt, size, score, grade }}
-    <div class="book">
-      <img src={`assets/img/${img}`} {alt} class={size} />
-      <div class="score">{score}</div>
-      <div class="grade">({grade})</div>
-    </div>
-  {/each}
+  <h3>{title}</h3>
+  <div class="books">
+    {#each data as { img, alt, size, score, grade }}
+      <div class="book">
+        <img src={`assets/img/${img}`} {alt} class={size} />
+        <div class="score">{score}</div>
+        <div class="grade">({grade})</div>
+      </div>
+    {/each}
+  </div>
 </div>
 
 <style>
+  h3 {
+    margin-bottom: 2.5rem;
+  }
   .container {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
     max-width: 1100px;
     width: calc(100% - 80px);
     margin: auto;
     margin-top: 4em;
     margin-bottom: 4em;
   }
-
+  .books {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+  }
   img {
     height: 250px;
     margin-bottom: 0.5em;
@@ -44,8 +56,9 @@
     transition: all 500ms;
   }
   img:hover {
-    transform: scale(1.2);
-    margin-bottom: 2em;
+    transform: scale(1.1);
+    margin-bottom: 1em;
+    margin-top: 1em;
   }
 
   .book {
