@@ -201,7 +201,8 @@
   .standard {
     padding-right: 1em;
   }
-  .plain {
+  .plain,
+  :global(.plain-style) {
     color: var(--color-dark-blue);
     font-family: var(--font-plain);
     font-size: var(--font-size-plain);
