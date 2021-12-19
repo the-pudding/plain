@@ -11,6 +11,7 @@
   export let plain = "";
   export let subtitle;
   export let deepDive = false;
+  export let deepDiveOpen = false;
 
   let mounted = false;
   $: noPlain = plain === "";
@@ -22,6 +23,12 @@
   $: $toggle, toggleChange();
   $: view, updateHeights();
   $: $viewport, updateHeights();
+  $: if (deepDiveOpen) updateDeep();
+
+  // hacky way to get deep dives to have their full height
+  const updateDeep = async () => {
+    setTimeout(updateHeights, 10);
+  };
 
   const toggleChange = () => {
     if ($toggle === "on") {

@@ -8,24 +8,22 @@
   export let chunks;
   export let title;
 
-  // hack to get deep dive sizes right
-  onMount(() => {
-    setTimeout(() => {
-      document.querySelectorAll("details").forEach((d, i) => {
-        d.removeAttribute("open");
-      });
-    }, 500);
-  });
+  let deepDiveOpen = false;
 </script>
 
 <section id="part-{part}">
   <h2>{title}</h2>
   {#each chunks as { standard, plain, graphic, deepDive, subchunks, description, subtitle }, i}
     {#if deepDive}
-      <details open>
+      <details on:click={() => (deepDiveOpen = !deepDiveOpen)}>
         <summary>{description}</summary>
         {#each subchunks as subchunk}
-          <Prose standard={subchunk.standard} plain={subchunk.plain} deepDive={true} />
+          <Prose
+            standard={subchunk.standard}
+            plain={subchunk.plain}
+            deepDive={true}
+            {deepDiveOpen}
+          />
         {/each}
       </details>
     {:else}
