@@ -74,4 +74,15 @@
   .grade {
     font-size: 16px;
   }
+
+  @media (max-width: 600px) {
+    img {
+      height: 130px;
+    }
+    img:hover {
+      transform: none;
+      margin-bottom: 0.5em;
+      margin-top: 0;
+    }
+  }
 </style>

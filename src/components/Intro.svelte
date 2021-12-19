@@ -46,7 +46,7 @@
   }
   .dek,
   .plain-dek {
-    font-size: var(--heading-font-size);
+    font-size: 30px;
     text-align: center;
     width: var(--column-width);
     margin: 0 auto;
@@ -109,5 +109,26 @@
     right: 0;
     z-index: var(--z-top);
     background-image: linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+  }
+
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 60px;
+    }
+    .dek,
+    .plain-dek {
+      font-size: 20px;
+    }
+  }
+  @media (max-width: 800px) {
+    .outer {
+      width: 100vw;
+    }
+    .slide-left {
+      transform: translate(15vw, 0);
+    }
+    .slide-right {
+      transform: translate(-55vw, 0);
+    }
   }
 </style>

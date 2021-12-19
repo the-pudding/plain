@@ -3,6 +3,7 @@
   import { usePrevious } from "svelte-previous";
   import { onMount } from "svelte";
   import { getPunctuation, wordsWithPunc, stripPunc } from "./movingText";
+  import viewport from "$stores/viewport.js";
 
   export let text;
   export let level;
@@ -11,8 +12,10 @@
   const [currentLevel, previousLevel] = usePrevious(level);
   $: $currentLevel = level;
   $: isBeginning = $previousLevel === null;
-  $: level, updateWordPositions();
+  $: level, update();
+  $: $viewport, update();
 
+  let mounted = false;
   const duration = 1000;
   let currentPositions;
   let allPositions;
@@ -22,18 +25,18 @@
       return [...acc, ..._.words(currentValue)];
     }, [])
   );
-  const isExiting = (word, level) => {
+  const isExiting = (word) => {
     const prev = allPositions[word][$previousLevel];
     return prev && prev.opacity === 1 && currentPositions[word].opacity < 1;
   };
-  const isEntering = (word, level) => {
+  const isEntering = (word) => {
     const prev = allPositions[word][$previousLevel];
     return !prev || (prev.opacity === 0 && currentPositions[word].opacity === 1);
   };
   const getDelay = (word) => {
-    if (isExiting(word)) return `${_.random(0, 1000)}ms`;
-    else if (isEntering(word)) return `${_.random(1600, 3000)}ms`;
-    else return `${_.random(600, 2000)}ms`;
+    if (isExiting(word)) return `${_.random(0, 500)}ms`;
+    else if (isEntering(word)) return `${_.random(500, 1000)}ms`;
+    else return `${_.random(800, 1500)}ms`;
   };
   const getPosition = (word) => {
     const prev = allPositions[word][$previousLevel];
@@ -42,8 +45,24 @@
     }
     return [currentPositions[word].x, currentPositions[word].y];
   };
-  const updateWordPositions = () => {
-    if (allPositions) {
+  const update = () => {
+    if (mounted) {
+      allPositions = allWords.reduce((acc, currentValue) => {
+        let data = [];
+
+        for (let i = 0; i < 3; i++) {
+          const w = _.words(text[i]);
+          if (w.includes(currentValue)) {
+            const el = document.querySelector(`#${algorithm}-${currentValue}-${i}`);
+            data = [...data, { x: el.offsetLeft, y: el.offsetTop, opacity: 1, scale: 1 }];
+          } else {
+            data = [...data, { x: null, y: null, opacity: 0, scale: 0 }];
+          }
+        }
+
+        return { ...acc, [currentValue]: data };
+      }, {});
+
       currentPositions = allWords.reduce((acc, currentValue) => {
         const myState = allPositions[currentValue][level];
         return { ...acc, [currentValue]: myState };
@@ -52,23 +71,8 @@
   };
 
   onMount(() => {
-    allPositions = allWords.reduce((acc, currentValue) => {
-      let data = [];
-
-      for (let i = 0; i < 3; i++) {
-        const w = _.words(text[i]);
-        if (w.includes(currentValue)) {
-          const el = document.querySelector(`#${algorithm}-${currentValue}-${i}`);
-          data = [...data, { x: el.offsetLeft, y: el.offsetTop, opacity: 1, scale: 1 }];
-        } else {
-          data = [...data, { x: null, y: null, opacity: 0, scale: 0 }];
-        }
-      }
-
-      return { ...acc, [currentValue]: data };
-    }, {});
-
-    updateWordPositions();
+    mounted = true;
+    update();
   });
 </script>
 

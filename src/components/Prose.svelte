@@ -5,16 +5,7 @@
   import swipe from "$svg/swipe.svg";
   import { select } from "d3";
   import { toggle } from "$stores/misc.js";
-
-  $: $toggle, toggleChange();
-
-  const toggleChange = () => {
-    if ($toggle === "on") {
-      view = "plain";
-    } else if ($toggle === "off") {
-      view = "standard";
-    }
-  };
+  import viewport from "$stores/viewport.js";
 
   export let standard = "";
   export let plain = "";
@@ -27,12 +18,23 @@
   let refs = [];
   let currentHeight = 0;
 
+  $: $toggle, toggleChange();
+  $: view, updateHeights();
+  $: $viewport, updateHeights();
+
+  const toggleChange = () => {
+    if ($toggle === "on") {
+      view = "plain";
+    } else if ($toggle === "off") {
+      view = "standard";
+    }
+  };
+
   const switchView = () => {
     if (view === "standard") view = "plain";
     else view = "standard";
   };
 
-  $: view, updateHeights();
   const getHeights = (d) => {
     const heightWithoutMargin = d.getBoundingClientRect().height;
     const formatPx = (str) => parseFloat(str.replace("px"));
@@ -213,5 +215,17 @@
   }
   h3 {
     margin-top: 2em;
+  }
+
+  @media (max-width: 800px) {
+    .outer {
+      width: 100vw;
+    }
+    .show-plain {
+      transform: translate(-55vw, 0);
+    }
+    .show-standard {
+      transform: translate(15vw, 0);
+    }
   }
 </style>
