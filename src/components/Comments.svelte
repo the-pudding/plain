@@ -165,4 +165,10 @@
   :global(.translation-step:hover) {
     cursor: pointer;
   }
+
+  @media (max-width: 600px) {
+    .container {
+      width: calc(100% - 30px);
+    }
+  }
 </style>

@@ -40,4 +40,11 @@
   :global(span#swipe-icon, span#tap-icon) {
     margin-right: 0.7rem;
   }
+
+  @media (max-width: 600px) {
+    .toggle {
+      top: 0.25em;
+      right: 0.25em;
+    }
+  }
 </style>

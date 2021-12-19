@@ -98,4 +98,22 @@
   .toggle--slider button:focus {
     box-shadow: 0 0 4px 0 var(--color-focus);
   }
+
+  @media (max-width: 600px) {
+    .toggle--inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    button {
+      width: 65px;
+    }
+    .label {
+      margin-bottom: 0.5em;
+    }
+    .toggle button,
+    .label {
+      font-size: 0.8em;
+    }
+  }
 </style>
