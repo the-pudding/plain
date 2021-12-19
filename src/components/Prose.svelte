@@ -10,6 +10,7 @@
   export let standard = "";
   export let plain = "";
   export let subtitle;
+  export let deepDive = false;
 
   let mounted = false;
   $: noPlain = plain === "";
@@ -68,7 +69,7 @@
   });
 </script>
 
-<div class:outer={true} class:no-plain={noPlain} bind:this={outerEl}>
+<div class:outer={true} class:no-plain={noPlain} class:deep-dive={deepDive} bind:this={outerEl}>
   <div
     class:inner={true}
     class:show-plain={view === "plain" && !noPlain}
@@ -221,6 +222,10 @@
     .outer {
       width: 100vw;
     }
+    .outer.deep-dive {
+      transform: translate(-15px, 0);
+    }
+
     .show-plain {
       transform: translate(-55vw, 0);
     }

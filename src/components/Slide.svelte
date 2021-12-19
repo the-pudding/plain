@@ -1,6 +1,7 @@
 <script>
   import MovingText from "$components/MovingText.svelte";
   import ButtonSet from "$components/helpers/ButtonSet.svelte";
+  import { tweened } from "svelte/motion";
 
   export let title;
   export let progression;
@@ -9,6 +10,16 @@
   let level = 1;
   $: ({ grade, explanation } = progression.filter((d) => parseInt(d.level) === level)[0]);
   const allText = progression.map((d) => d.text);
+  let explanationOpacity = tweened(0, { duration: 800, delay: 200 });
+
+  $: level, fadeIn();
+  const fadeIn = () => {
+    if ($explanationOpacity === 0) $explanationOpacity = 1;
+    else {
+      explanationOpacity = tweened(0, { duration: 800, delay: 200 });
+      $explanationOpacity = 1;
+    }
+  };
 
   const options = [
     { value: 0, label: "Easy" },
@@ -28,7 +39,7 @@
   </div>
 
   <MovingText text={allText} {level} {algorithm} />
-  <div class="explanation">{explanation}</div>
+  <div class="explanation" style={`--opacity: ${$explanationOpacity}`}>{explanation}</div>
 </div>
 
 <style>
@@ -59,5 +70,6 @@
   .explanation {
     margin-top: 2em;
     color: var(--color-gray-dark);
+    opacity: var(--opacity);
   }
 </style>

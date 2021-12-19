@@ -25,7 +25,7 @@
       <details open>
         <summary>{description}</summary>
         {#each subchunks as subchunk}
-          <Prose standard={subchunk.standard} plain={subchunk.plain} />
+          <Prose standard={subchunk.standard} plain={subchunk.plain} deepDive={true} />
         {/each}
       </details>
     {:else}
@@ -65,5 +65,11 @@
     margin: 0 auto;
     margin-bottom: 1rem;
     margin-top: 4rem;
+  }
+
+  @media (max-width: 800px) {
+    details {
+      width: calc(100% - 30px);
+    }
   }
 </style>

@@ -97,7 +97,7 @@
     </div>
     <div class="after">
       <p class="head">PLAIN LANGUAGE</p>
-      <p>{@html after}</p>
+      <p class="plain-style">{@html after}</p>
     </div>
   </div>
   <div class="description" class:show-description={!!description}>
