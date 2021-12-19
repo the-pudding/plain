@@ -74,7 +74,7 @@
   }
   .inner {
     display: flex;
-    transition: transform 1000ms;
+    transition: transform 700ms;
     margin: 4rem auto;
   }
   .slide-left {
