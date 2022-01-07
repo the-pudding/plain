@@ -3,7 +3,7 @@
   import _ from "lodash";
   import tap from "$svg/tap.svg";
   import swipe from "$svg/swipe.svg";
-  import { select } from "d3";
+  import { select, selectAll } from "d3";
   import { toggle } from "$stores/misc.js";
   import viewport from "$stores/viewport.js";
 
@@ -65,8 +65,17 @@
   };
 
   const placeIcons = () => {
-    select("span#tap-icon").html(tap);
-    select("span#swipe-icon").html(swipe);
+    selectAll("span.tap-icon").html(tap);
+    // selectAll("span#swipe-icon").html(swipe);
+  };
+
+  const instructions = (text, mobile, mounted) => {
+    if (mounted) {
+      placeIcons();
+      if (mobile) return text.replace("Click", "Tap").replace("click", "tap");
+      return text;
+    }
+    return text;
   };
 
   onMount(async () => {
@@ -87,7 +96,7 @@
     {:else if noPlain}
       {#each standard as { type, value }}
         {#if type === "text"}
-          <p>{@html value}</p>
+          <p>{@html instructions(value, $viewport.width < 800, mounted)}</p>
         {:else if type === "list"}
           <ul>
             {#each value as v}
