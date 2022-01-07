@@ -23,8 +23,8 @@
   --color-bg: var(--color-white);
   --color-fg: var(--color-off-black);
   --color-placeholder: var(--color-gray-dark);
-  --color-link: steelblue;
-  --color-focus: steelblue;
+  --color-link: var(--color-dark-blue);
+  --color-focus: var(--color-dark-blue);
   --color-form-bg: var(--color-off-white);
   --color-form-fg: var(--color-off-black);
   --color-border: var(--color-gray-light);
