@@ -3,6 +3,7 @@
   import Intro from "$components/Intro.svelte";
   import Part from "$components/Part.svelte";
   import Toggle from "$components/helpers/Toggle.svelte";
+  import Credits from "$components/Credits.svelte";
   import Footer from "$components/Footer.svelte";
   import copy from "$data/doc.json";
   import { toggle } from "$stores/misc.js";
@@ -13,6 +14,8 @@
   const changeView = () => {
     toggle.set(toggleState);
   };
+
+  $: console.log({ copy });
 
   setContext("App", { copy });
 </script>
@@ -26,6 +29,8 @@
 {#each copy.parts as { part, title, chunks }}
   <Part {part} {title} {chunks} />
 {/each}
+
+<Credits text={copy.credits} />
 
 <Footer />
 
