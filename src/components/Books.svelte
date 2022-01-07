@@ -52,13 +52,7 @@
   img {
     height: 250px;
     margin-bottom: 0.5em;
-    transform: scale(1);
     transition: all 500ms;
-  }
-  img:hover {
-    transform: scale(1.1);
-    margin-bottom: 1em;
-    margin-top: 1em;
   }
 
   .book {
@@ -78,11 +72,6 @@
   @media (max-width: 600px) {
     img {
       height: 130px;
-    }
-    img:hover {
-      transform: none;
-      margin-bottom: 0.5em;
-      margin-top: 0;
     }
   }
 </style>
