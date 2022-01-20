@@ -107,7 +107,7 @@
       {/each}
     {:else}
       {#each ["standard", "plain"] as v, i}
-        <div
+        <button
           style={`--maxHeight: ${currentHeight}px`}
           class={`text ${v}`}
           class:faded={view !== v}
@@ -125,7 +125,7 @@
               </ul>
             {/if}
           {/each}
-        </div>
+        </button>
       {/each}
     {/if}
   </div>
@@ -198,7 +198,18 @@
   .text {
     width: var(--column-width);
     transition: opacity 500ms;
+
+    /* removing <button> styling */
+    background: none;
+    padding: 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
   }
+  .text:focus {
+    box-shadow: none;
+  }
+
   .standard:hover,
   .plain:hover {
     cursor: pointer;

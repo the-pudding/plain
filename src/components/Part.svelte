@@ -12,7 +12,7 @@
 </script>
 
 <section id="part-{part}">
-  <h2>{title}</h2>
+  {#if title} <h2>{title}</h2> {/if}
   {#each chunks as { standard, plain, graphic, deepDive, subchunks, description, subtitle }, i}
     {#if deepDive}
       <details on:click={() => (deepDiveOpen = !deepDiveOpen)}>

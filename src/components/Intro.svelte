@@ -23,7 +23,8 @@
         <p class="plain-dek">{@html copy.dekPlain}</p>
       </div>
     </div>
-    <p class="author">{@html copy.author}</p>
+    <div class="author">{@html copy.byline}</div>
+    <div class="author">{@html copy.byline2}</div>
   </div>
 </section>
 
@@ -61,6 +62,7 @@
     font-weight: bold;
     text-align: center;
     font-size: 16px;
+    margin-top: 0.5em;
   }
 
   .outer {
