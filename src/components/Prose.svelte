@@ -227,9 +227,6 @@
     font-family: var(--font-plain);
     font-size: var(--font-size-plain);
   }
-  ul {
-    padding-left: 1em;
-  }
   h3 {
     margin-top: 2em;
   }

@@ -8,7 +8,7 @@
       score: 680,
       grade: "5th grade"
     },
-    { img: "twilight.jpeg", alt: "twilight cover", score: 720, grade: "7th grade" },
+    { img: "nancy.jpeg", alt: "nancy drew cover", score: 720, grade: "7th grade" },
     {
       img: "mouse.jpeg",
       alt: "the library mouse cover",
