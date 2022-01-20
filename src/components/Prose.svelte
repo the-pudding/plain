@@ -256,5 +256,8 @@
     .show-standard {
       transform: translate(15vw, 0);
     }
+    .standard {
+      padding-right: 0.6em;
+    }
   }
 </style>

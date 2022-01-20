@@ -138,7 +138,7 @@
     opacity: 0;
   }
   .entering {
-    color: red;
+    color: #d14e49;
   }
   .exiting {
   }

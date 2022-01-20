@@ -149,6 +149,8 @@
     margin: 0;
   }
   .description {
+    width: var(--column-width);
+    margin: auto;
     color: var(--color-gray-dark);
     font-style: italic;
     display: flex;

@@ -68,8 +68,9 @@
     flex-direction: column;
   }
   .explanation {
+    width: var(--column-width);
+    margin: auto;
     margin-top: 2em;
-    color: var(--color-gray-dark);
     opacity: var(--opacity);
   }
 </style>
