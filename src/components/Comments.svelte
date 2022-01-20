@@ -13,7 +13,8 @@
     variables.color["comment-blue"],
     variables.color["comment-purple"]
   ];
-  const placeholder = "Click the highlighted text to see Rebecca's comments.";
+  const placeholder =
+    "Click the <span class=highlight>highlighted</span> text to see Rebecca's comments.";
 
   const { before, after, title } = data;
   let mounted = false;

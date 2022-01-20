@@ -54,6 +54,9 @@ ul {
 li {
   padding: 0.3em 0 0.3em 0;
 }
+.highlight {
+  background: var(--color-comment-yellow);
+}
 
 @media only screen and (min-width: 800px) {
   body {
