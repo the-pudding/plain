@@ -111,7 +111,9 @@
           style={`--maxHeight: ${currentHeight}px`}
           class={`text ${v}`}
           class:faded={view !== v}
-          on:click={switchView}
+          on:click={() => {
+            if (view !== v) switchView();
+          }}
           bind:this={refs[i]}
         >
           {#each v === "standard" ? standard : plain as { type, value }}
@@ -208,10 +210,15 @@
   }
   .text:focus {
     box-shadow: none;
+    background: #f4f7f9;
+    border-radius: 0px;
+    outline: 2px solid var(--color-focus);
+  }
+  .text:hover {
+    cursor: auto;
   }
 
-  .standard:hover,
-  .plain:hover {
+  .faded:hover {
     cursor: pointer;
   }
   .faded {
@@ -229,8 +236,9 @@
     z-index: var(--z-top);
     background-image: linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
   }
-  .standard {
-    padding-right: 1em;
+  .standard,
+  .plain {
+    padding: 0 0.3em 0 0.3em;
   }
   .plain,
   :global(.plain-style) {
