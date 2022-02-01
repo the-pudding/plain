@@ -2,7 +2,6 @@
   import _ from "lodash";
   import Prose from "$components/Prose.svelte";
   import Graphic from "$components/Graphic.svelte";
-  import { onMount } from "svelte";
 
   export let part;
   export let chunks;

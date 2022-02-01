@@ -80,6 +80,8 @@
 
   onMount(async () => {
     mounted = true;
+
+    await tick();
     updateHeights();
     placeIcons();
   });

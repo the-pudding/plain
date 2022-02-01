@@ -21,7 +21,7 @@
   let step = null;
   let inContainer = false;
   let hoveredStep = null;
-  let selectedColor = null;
+  let selectedColor = "var(--color-off-black)";
   $: description = step !== null ? data.steps[step].description : placeholder;
 
   $: hoveredStep, hoverChange();
@@ -103,11 +103,13 @@
       <p class="plain-style">{@html after}</p>
     </div>
   </div>
+
   <div
     class="description"
     class:show-description={!!description}
     style={`--color: ${selectedColor}`}
   >
+    <div class="description-title">Rebecca's comments</div>
     <div class="description-inner">{@html description}</div>
   </div>
 </div>
@@ -157,16 +159,23 @@
   .description {
     width: var(--column-width);
     margin: auto;
-    color: var(--color-gray-dark);
-    font-style: italic;
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
     opacity: 0;
     margin-bottom: 2em;
     margin-top: 3rem;
     border-left: 4px solid var(--color);
     padding-left: 12px;
     transform: translate(-12px, 0px);
+  }
+  .description-title {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  .description-inner {
+    color: var(--color-gray-dark);
+    font-style: italic;
   }
   .show-description {
     opacity: 1;
