@@ -21,6 +21,7 @@
   let step = null;
   let inContainer = false;
   let hoveredStep = null;
+  let selectedColor = null;
   $: description = step !== null ? data.steps[step].description : placeholder;
 
   $: hoveredStep, hoverChange();
@@ -86,6 +87,7 @@
   const onClick = (e) => {
     const num = parseInt(e.target.id.replace(/^\D+/g, ""));
     step = num;
+    selectedColor = colors[num];
   };
 </script>
 
@@ -101,7 +103,11 @@
       <p class="plain-style">{@html after}</p>
     </div>
   </div>
-  <div class="description" class:show-description={!!description}>
+  <div
+    class="description"
+    class:show-description={!!description}
+    style={`--color: ${selectedColor}`}
+  >
     <div class="description-inner">{@html description}</div>
   </div>
 </div>
@@ -158,6 +164,9 @@
     opacity: 0;
     margin-bottom: 2em;
     margin-top: 3rem;
+    border-left: 4px solid var(--color);
+    padding-left: 12px;
+    transform: translate(-12px, 0px);
   }
   .show-description {
     opacity: 1;
@@ -172,6 +181,14 @@
   @media (max-width: 600px) {
     .container {
       width: calc(100% - 30px);
+    }
+    .texts {
+      font-size: 14px;
+      flex-direction: column;
+    }
+    .before {
+      margin-right: 0;
+      margin-bottom: 10px;
     }
   }
 </style>
