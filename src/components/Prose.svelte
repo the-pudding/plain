@@ -262,10 +262,6 @@
     z-index: var(--z-top);
     background-image: linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
   }
-  /* .standard,
-  .plain {
-    padding: 0 0.3em 0 0.3em;
-  } */
   .standard {
     padding-right: 0.5em;
   }
@@ -283,21 +279,11 @@
     .outer {
       width: 100vw;
     }
-    .outer.deep-dive {
-      transform: translate(-15px, 0);
-    }
-
     .show-plain {
       transform: translate(-55vw, 0);
     }
     .show-standard {
       transform: translate(15vw, 0);
-    }
-  }
-
-  @media (max-width: 600px) {
-    .outer.no-plain {
-      width: 80%;
     }
   }
 </style>

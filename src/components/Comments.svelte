@@ -107,10 +107,6 @@
   </div>
 
   <div class="description-title" style={`--color: ${selectedColor}`}>Rebecca's comments</div>
-  <Prose
-    standard={[{ type: "text", value: description }]}
-    plain={[{ type: "text", value: descriptionPlain }]}
-  />
 
   <!-- <div
     class="description"
@@ -121,6 +117,10 @@
     <div class="description-inner">{@html description}</div>
   </div> -->
 </div>
+<Prose
+  standard={[{ type: "text", value: description }]}
+  plain={[{ type: "text", value: descriptionPlain }]}
+/>
 
 <style>
   .container {
@@ -136,9 +136,8 @@
     margin-bottom: 0.5rem;
   }
   h3 {
-    max-width: 1100px;
-    width: calc(100% - 80px);
-    margin: 0 auto;
+    width: var(--column-width);
+    margin: auto;
     margin-top: 3rem;
     margin-bottom: 1.5rem;
   }

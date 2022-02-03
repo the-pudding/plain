@@ -43,6 +43,10 @@
 </div>
 
 <style>
+  h3 {
+    width: var(--column-width);
+    margin: auto;
+  }
   .reading-level {
     font-size: 16px;
     margin: auto;

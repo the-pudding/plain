@@ -33,6 +33,8 @@
 
 <style>
   h3 {
+    width: var(--column-width);
+    margin: auto;
     margin-bottom: 2.5rem;
   }
   .container {
