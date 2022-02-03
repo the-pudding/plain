@@ -101,7 +101,7 @@
           class:word={true}
           class:entering={isEntering(word, level) && !isBeginning}
           class:exiting={isExiting(word, level)}
-          id={`${word}`}
+          id={`${algorithm}-${word}`}
           style={`--delay: ${getDelay(word)}; --duration: ${duration}ms; left: ${
             getPosition(word)[0]
           }px; top: ${getPosition(word)[1]}px; opacity: ${

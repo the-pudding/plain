@@ -13,7 +13,9 @@
 <section id="part-{part}">
   {#if title} <h2>{title}</h2> {/if}
   {#each chunks as { standard, plain, graphic, deepDive, subchunks, description, subtitle }, i}
-    {#if deepDive}
+    {#if graphic}
+      <Graphic {graphic} />
+    {:else if deepDive}
       <details on:click={() => (deepDiveOpen = !deepDiveOpen)}>
         <summary>{description}</summary>
         {#each subchunks as subchunk}
@@ -27,10 +29,6 @@
       </details>
     {:else}
       <Prose {standard} {plain} {subtitle} />
-    {/if}
-
-    {#if graphic}
-      <Graphic {graphic} />
     {/if}
   {/each}
 </section>

@@ -92,6 +92,7 @@
     class:inner={true}
     class:show-plain={view === "plain" && !noPlain}
     class:show-standard={view === "standard" && !noPlain}
+    class:info-box={!subtitle && noPlain}
   >
     {#if subtitle}
       <h3 class="text">{subtitle}</h3>
@@ -113,6 +114,7 @@
           style={`--maxHeight: ${currentHeight}px`}
           class={`text ${v}`}
           class:faded={view !== v}
+          disabled={view === v}
           on:click={() => {
             if (view !== v) switchView();
           }}
@@ -199,9 +201,15 @@
     transform: translate(15%, 0%);
   }
 
+  .info-box {
+    background-color: #f3f1f1;
+    padding: 0.25em 0.5em 0.25em 0.5em;
+  }
+
   .text {
     width: var(--column-width);
     transition: opacity 500ms;
+    opacity: 1;
 
     /* removing <button> styling */
     background: none;

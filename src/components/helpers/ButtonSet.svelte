@@ -15,7 +15,7 @@
 
 <div class="button-set">
   <div
-    id={`group-${id}`}
+    id={`group-${id}-outer`}
     class="group"
     class:is-top={isTop}
     role="radiogroup"

@@ -4,7 +4,7 @@
   export let options = ["on", "off"];
   export let value = options[0];
 
-  let checked = value === options[0];
+  $: checked = value === options[0];
 
   const id = `toggle-${Math.floor(Math.random() * 1000000)}`;
 
@@ -25,8 +25,14 @@
     {/if}
   </button>
 </div>
+<div class="use-keyboard plain-style">(Or use the letter "p")</div>
 
 <style>
+  .use-keyboard {
+    font-size: 13px;
+    margin-top: 0.5em;
+  }
+
   .toggle button,
   .label {
     font-family: inherit;

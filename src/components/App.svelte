@@ -1,5 +1,5 @@
 <script>
-  import { setContext } from "svelte";
+  import { onMount, setContext } from "svelte";
   import Intro from "$components/Intro.svelte";
   import Part from "$components/Part.svelte";
   import Toggle from "$components/helpers/Toggle.svelte";
@@ -15,10 +15,27 @@
     toggle.set(toggleState);
   };
 
+  let keyCode;
+  const handleKeydown = (event) => {
+    keyCode = event.keyCode;
+
+    if (keyCode === 80) {
+      if (toggleState === "on") {
+        toggle.set("off");
+        toggleState = "off";
+      } else {
+        toggle.set("on");
+        toggleState = "on";
+      }
+    }
+  };
+
   $: console.log({ copy });
 
   setContext("App", { copy });
 </script>
+
+<svelte:window on:keydown={handleKeydown} />
 
 <Intro />
 
@@ -41,6 +58,9 @@
     right: 1em;
     background: white;
     z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   :global(span#swipe-icon, span#tap-icon) {
     margin-right: 0.7rem;
