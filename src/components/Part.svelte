@@ -43,6 +43,7 @@
     max-width: 1100px;
     margin: auto;
     width: calc(100% - 80px);
+    margin-top: 1.5em;
   }
   summary {
     font-weight: bold;

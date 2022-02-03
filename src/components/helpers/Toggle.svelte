@@ -25,7 +25,7 @@
     {/if}
   </button>
 </div>
-<div class="use-keyboard plain-style">(Or use the letter "p")</div>
+<div class="use-keyboard plain-style">(Or use the "p" key)</div>
 
 <style>
   .use-keyboard {

@@ -1,4 +1,5 @@
 <script>
+  import Prose from "$components/Prose.svelte";
   import { onMount } from "svelte";
   import _ from "lodash";
   import variables from "$data/variables.json";
@@ -23,6 +24,7 @@
   let hoveredStep = null;
   let selectedColor = "var(--color-off-black)";
   $: description = step !== null ? data.steps[step].description : placeholder;
+  $: descriptionPlain = step !== null ? data.steps[step]["description-plain"] : placeholder;
 
   $: hoveredStep, hoverChange();
   const hoverChange = () => {
@@ -104,14 +106,19 @@
     </div>
   </div>
 
-  <div
+  <Prose
+    standard={[{ type: "text", value: description }]}
+    plain={[{ type: "text", value: descriptionPlain }]}
+  />
+
+  <!-- <div
     class="description"
     class:show-description={!!description}
     style={`--color: ${selectedColor}`}
   >
     <div class="description-title">Rebecca's comments</div>
     <div class="description-inner">{@html description}</div>
-  </div>
+  </div> -->
 </div>
 
 <style>
@@ -136,6 +143,7 @@
   }
   .texts {
     display: flex;
+    margin-bottom: 1.5em;
   }
   .before,
   .after {
@@ -156,7 +164,7 @@
   p {
     margin: 0;
   }
-  .description {
+  /* .description {
     width: var(--column-width);
     margin: auto;
     display: flex;
@@ -176,10 +184,10 @@
   .description-inner {
     color: var(--color-gray-dark);
     font-style: italic;
-  }
-  .show-description {
+  } */
+  /* .show-description {
     opacity: 1;
-  }
+  } */
   :global(.fade) {
     opacity: 0.2;
   }

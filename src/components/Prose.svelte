@@ -2,7 +2,6 @@
   import { onMount, tick } from "svelte";
   import _ from "lodash";
   import tap from "$svg/tap.svg";
-  import swipe from "$svg/swipe.svg";
   import { select, selectAll } from "d3";
   import { toggle } from "$stores/misc.js";
   import viewport from "$stores/viewport.js";
@@ -21,8 +20,7 @@
   let currentHeight = 0;
 
   $: $toggle, toggleChange();
-  $: view, updateHeights();
-  $: $viewport, updateHeights();
+  $: view, $viewport, standard, plain, updateHeights();
   $: if (deepDiveOpen) updateDeep();
 
   // hacky way to get deep dives to have their full height
@@ -52,7 +50,8 @@
     return heightWithoutMargin + margin;
   };
 
-  const updateHeights = () => {
+  const updateHeights = async () => {
+    await tick();
     if (mounted && !noPlain) {
       const standardHeight = _.sum(Array.from(refs[0].children).map(getHeights));
       const plainHeight = _.sum(Array.from(refs[1].children).map(getHeights));
@@ -66,7 +65,6 @@
 
   const placeIcons = () => {
     selectAll("span.tap-icon").html(tap);
-    // selectAll("span#swipe-icon").html(swipe);
   };
 
   const instructions = (text, mobile, mounted) => {
@@ -110,28 +108,46 @@
       {/each}
     {:else}
       {#each ["standard", "plain"] as v, i}
-        <button
-          style={`--maxHeight: ${currentHeight}px`}
-          class={`text ${v}`}
-          class:faded={view !== v}
-          disabled={view === v}
-          on:click={() => {
-            if (view !== v) switchView();
-          }}
-          bind:this={refs[i]}
-        >
-          {#each v === "standard" ? standard : plain as { type, value }}
-            {#if type === "text"}
-              <p>{@html value}</p>
-            {:else if type === "list"}
-              <ul>
-                {#each value as v}
-                  <li>{@html v}</li>
-                {/each}
-              </ul>
-            {/if}
-          {/each}
-        </button>
+        {#if v === view}
+          <div
+            style={`--maxHeight: ${currentHeight}px`}
+            class={`text ${v}`}
+            class:faded={false}
+            bind:this={refs[i]}
+          >
+            {#each v === "standard" ? standard : plain as { type, value }}
+              {#if type === "text"}
+                <p>{@html value}</p>
+              {:else if type === "list"}
+                <ul>
+                  {#each value as v}
+                    <li>{@html v}</li>
+                  {/each}
+                </ul>
+              {/if}
+            {/each}
+          </div>
+        {:else}
+          <button
+            style={`--maxHeight: ${currentHeight}px`}
+            class={`text ${v}`}
+            class:faded={true}
+            on:click={switchView}
+            bind:this={refs[i]}
+          >
+            {#each v === "standard" ? standard : plain as { type, value }}
+              {#if type === "text"}
+                <p>{@html value}</p>
+              {:else if type === "list"}
+                <ul>
+                  {#each value as v}
+                    <li>{@html v}</li>
+                  {/each}
+                </ul>
+              {/if}
+            {/each}
+          </button>
+        {/if}
       {/each}
     {/if}
   </div>
@@ -276,6 +292,12 @@
     }
     .standard {
       padding-right: 0.6em;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .outer.no-plain {
+      width: 80%;
     }
   }
 </style>
