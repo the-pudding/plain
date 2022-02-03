@@ -22,7 +22,7 @@
   let step = null;
   let inContainer = false;
   let hoveredStep = null;
-  let selectedColor = "var(--color-off-black)";
+  let selectedColor = "white";
   $: description = step !== null ? data.steps[step].description : placeholder;
   $: descriptionPlain = step !== null ? data.steps[step]["description-plain"] : placeholder;
 
@@ -106,6 +106,7 @@
     </div>
   </div>
 
+  <div class="description-title" style={`--color: ${selectedColor}`}>Rebecca's comments</div>
   <Prose
     standard={[{ type: "text", value: description }]}
     plain={[{ type: "text", value: descriptionPlain }]}
@@ -164,30 +165,14 @@
   p {
     margin: 0;
   }
-  /* .description {
-    width: var(--column-width);
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    opacity: 0;
-    margin-bottom: 2em;
-    margin-top: 3rem;
-    border-left: 4px solid var(--color);
-    padding-left: 12px;
-    transform: translate(-12px, 0px);
-  }
   .description-title {
     font-size: 1.4rem;
     margin-bottom: 10px;
     font-weight: bold;
+    border-bottom: 4px solid var(--color);
+    width: var(--column-width);
+    margin: auto;
   }
-  .description-inner {
-    color: var(--color-gray-dark);
-    font-style: italic;
-  } */
-  /* .show-description {
-    opacity: 1;
-  } */
   :global(.fade) {
     opacity: 0.2;
   }

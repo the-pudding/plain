@@ -262,9 +262,12 @@
     z-index: var(--z-top);
     background-image: linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
   }
-  .standard,
+  /* .standard,
   .plain {
     padding: 0 0.3em 0 0.3em;
+  } */
+  .standard {
+    padding-right: 0.5em;
   }
   .plain,
   :global(.plain-style) {
@@ -289,9 +292,6 @@
     }
     .show-standard {
       transform: translate(15vw, 0);
-    }
-    .standard {
-      padding-right: 0.6em;
     }
   }
 
