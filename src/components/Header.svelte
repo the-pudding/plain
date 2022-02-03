@@ -27,4 +27,10 @@
   :global(.wordmark svg path) {
     fill: currentColor;
   }
+
+  @media (max-width: 600px) {
+    .wordmark {
+      margin-left: 1em;
+    }
+  }
 </style>

@@ -140,6 +140,10 @@
   .entering {
     color: #db433d;
   }
-  .exiting {
+
+  @media (max-width: 600px) {
+    .container {
+      font-size: 2.5em;
+    }
   }
 </style>
