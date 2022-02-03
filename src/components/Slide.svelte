@@ -48,7 +48,7 @@
     margin: auto;
   }
   .reading-level {
-    font-size: 16px;
+    font-size: 0.8rem;
     margin: auto;
     margin-bottom: 1em;
   }

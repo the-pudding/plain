@@ -39,7 +39,6 @@
     margin: 0 auto;
   }
   details {
-    font-size: 16px;
     margin-top: 1.5em;
   }
   summary {
