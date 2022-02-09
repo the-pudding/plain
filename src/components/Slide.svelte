@@ -59,7 +59,7 @@
   </div>
 
   <MovingText text={allText} {level} {algorithm} />
-  <div class="explanation" style={`--opacity: ${$explanationOpacity}`}>{@html explanation}</div>
+  <p class="explanation" style={`--opacity: ${$explanationOpacity}`}>{@html explanation}</p>
 </figure>
 
 <style>
