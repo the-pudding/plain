@@ -16,6 +16,12 @@
   };
 </script>
 
+<p class="sr-only">
+  The following is a toggle that allows you to change whether the text is standard or translated
+  into plain language. Press the p key at any time to switch between standard and plain language
+  versions of the article.
+</p>
+
 <div class="toggle toggle--{style}">
   <span class="label" {id}>{label}</span>
   <button role="switch" aria-checked={checked} aria-labelledby={id} on:click={handleClick}>
