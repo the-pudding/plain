@@ -85,7 +85,40 @@
   });
 </script>
 
-<div class:outer={true} class:no-plain={noPlain} class:deep-dive={deepDive} bind:this={outerEl}>
+<div class="sr-only">
+  {#if view === "standard"}
+    {#each standard as { type, value }}
+      {#if type === "text"}
+        <p>{@html value}</p>
+      {:else if type === "list"}
+        <ul>
+          {#each value as v}
+            <li>{@html v}</li>
+          {/each}
+        </ul>
+      {/if}
+    {/each}
+  {:else}
+    {#each plain as { type, value }}
+      {#if type === "text"}
+        <p>{@html value}</p>
+      {:else if type === "list"}
+        <ul>
+          {#each value as v}
+            <li>{@html v}</li>
+          {/each}
+        </ul>
+      {/if}
+    {/each}
+  {/if}
+</div>
+<div
+  aria-hidden={true}
+  class:outer={true}
+  class:no-plain={noPlain}
+  class:deep-dive={deepDive}
+  bind:this={outerEl}
+>
   <div
     class:inner={true}
     class:show-plain={view === "plain" && !noPlain}

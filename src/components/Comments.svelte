@@ -175,6 +175,10 @@
   :global(.fade) {
     opacity: 0.2;
   }
+  :global(.translation-step) {
+    text-decoration: none;
+    color: var(--color-fg);
+  }
   :global(.translation-step:hover) {
     cursor: pointer;
   }
