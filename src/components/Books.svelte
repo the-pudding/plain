@@ -18,7 +18,14 @@
   ];
 </script>
 
-<div class="container">
+<figure class="container">
+  <figcaption class="sr-only">
+    Images of three book covers arranged by how difficult the Lexile algorithm thinks they are. It
+    says Grapes of Wrath is the easiest, followed by Nancy's Mysterious Letter, and the hardest is
+    The Library Mouse, a 32-page illustrated children's book. This doesn't make much sense, most
+    people would say that Grapes of Wrath is much more difficult than a simple children's book.
+  </figcaption>
+
   <h3>{title}</h3>
   <div class="books">
     {#each data as { img, alt, size, score, grade }}
@@ -29,7 +36,7 @@
       </div>
     {/each}
   </div>
-</div>
+</figure>
 
 <style>
   h3 {

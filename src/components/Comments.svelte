@@ -93,22 +93,29 @@
   };
 </script>
 
-<h3>{title}</h3>
-<div class="container">
-  <div class="texts">
-    <div class="before" on:mouseenter={enterContainer} on:mouseleave={exitContainer}>
-      <p class="head">ORIGINAL</p>
-      <p>{@html before}</p>
-    </div>
-    <div class="after">
-      <p class="head">PLAIN LANGUAGE</p>
-      <p class="plain-style">{@html after}</p>
-    </div>
-  </div>
+<figure>
+  <figcaption class="sr-only">
+    An example of translating text from standard to plain language where you can select Rebecca's
+    comments to learn more about her translation process.
+  </figcaption>
 
-  <div class="description-title" style={`--color: ${selectedColor}`}>Rebecca's comments</div>
+  <h3>{title}</h3>
 
-  <!-- <div
+  <div class="container">
+    <div class="texts">
+      <div class="before" on:mouseenter={enterContainer} on:mouseleave={exitContainer}>
+        <p class="head">ORIGINAL</p>
+        <p>{@html before}</p>
+      </div>
+      <div class="after">
+        <p class="head">PLAIN LANGUAGE</p>
+        <p class="plain-style">{@html after}</p>
+      </div>
+    </div>
+
+    <div class="description-title" style={`--color: ${selectedColor}`}>Rebecca's comments</div>
+
+    <!-- <div
     class="description"
     class:show-description={!!description}
     style={`--color: ${selectedColor}`}
@@ -116,11 +123,12 @@
     <div class="description-title">Rebecca's comments</div>
     <div class="description-inner">{@html description}</div>
   </div> -->
-</div>
-<Prose
-  standard={[{ type: "text", value: description }]}
-  plain={[{ type: "text", value: descriptionPlain }]}
-/>
+  </div>
+  <Prose
+    standard={[{ type: "text", value: description }]}
+    plain={[{ type: "text", value: descriptionPlain }]}
+  />
+</figure>
 
 <style>
   .container {

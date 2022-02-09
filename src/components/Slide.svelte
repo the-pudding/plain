@@ -28,7 +28,27 @@
   ];
 </script>
 
-<div class="container">
+<figure class="container">
+  <figcaption class="sr-only">
+    {#if algorithm === "Flesch-Kincaid"}
+      An interactive showing what the Flesch-Kincaid algorithm considers a easy, medium, and hard
+      sentence. The algorithm deems sentences with lower syllable counts to be easier, so when long
+      multisyllabic words are added (even if they are easy words), the algorithm says it's a hard
+      sentence. If we add short but obscure words, the algorithm thinks it's an easier sentence. We
+      see that the Flesch-Kincaid algorithm isn't able to handle much complexity when it comes to
+      assessing readability.
+    {:else if algorithm === "Dale-Chall"}
+      An interactive showing what the Dale-Chall algorithm considers a easy, medium, and hard
+      sentence. Dale-Chall considers average sentence length along with how many difficult words are
+      used, where “difficult” words are words that don't appear on the Dale-Chall list. If we add
+      words that are unfamiliar (like dinosaur or dude) the algorithm says it's a difficult
+      sentence. If we simply add a sentence that just contains the exclamation "Yes!", that lowers
+      the average sentence length and makes the algorithm say it's an easier sentence. We see that
+      the Dale-Chall algorithm isn't able to handle much complexity when it comes to assessing
+      readability.
+    {/if}
+  </figcaption>
+
   <h3>{@html title}</h3>
   <div class="buttons">
     <ButtonSet legend={"Change reading level"} {options} bind:value={level} />
@@ -40,7 +60,7 @@
 
   <MovingText text={allText} {level} {algorithm} />
   <div class="explanation" style={`--opacity: ${$explanationOpacity}`}>{@html explanation}</div>
-</div>
+</figure>
 
 <style>
   h3 {
