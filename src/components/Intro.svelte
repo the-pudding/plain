@@ -61,7 +61,7 @@
   .author {
     font-weight: bold;
     text-align: center;
-    font-size: 16px;
+    font-size: 1em;
     margin-top: 0.5em;
   }
 

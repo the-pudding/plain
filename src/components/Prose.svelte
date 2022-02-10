@@ -269,9 +269,9 @@
   }
   .text:focus {
     box-shadow: none;
-    background: #f4f7f9;
+    background: #c0bebe;
     border-radius: 0px;
-    outline: 2px solid var(--color-focus);
+    /* outline: 2px solid var(--color-focus); */
   }
   .text:hover {
     cursor: auto;
