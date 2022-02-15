@@ -1,6 +1,6 @@
 <script>
-  export let title = "Title TK";
-  export let description = "Description TK";
+  export let title = "What makes writing readable?";
+  export let description = "Looking at making writing easier to read";
   export let url = "https://pudding.cool";
 </script>
 
