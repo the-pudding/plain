@@ -19,7 +19,8 @@
 <p class="sr-only">
   The following is a toggle that allows you to change whether the text is standard or translated
   into plain language. Press the p key at any time to switch between standard and plain language
-  versions of the article.
+  versions of the article. If you are using a screen reader, you will need to disable your the quick
+  navigation keyboard commands in order for the P key to function.
 </p>
 
 <div class="toggle toggle--{style}">
@@ -31,7 +32,7 @@
     {/if}
   </button>
 </div>
-<div class="use-keyboard plain-style">(Or use the "p" key)</div>
+<div aria-hidden={true} class="use-keyboard plain-style">(Or use the "p" key)</div>
 
 <style>
   .use-keyboard {

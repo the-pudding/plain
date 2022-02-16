@@ -78,24 +78,25 @@
 
 <div class="container">
   <div class="spacer">{text[level]}</div>
-  <div class="text hide">
+
+  <div class="text hide" aria-hidden={true}>
     {#each wordsWithPunc(text[0]) as word}
       <span id={`${algorithm}-${stripPunc(word)}-0`}>{word} </span>
     {/each}
   </div>
-  <div class="text hide">
+  <div class="text hide" aria-hidden={true}>
     {#each wordsWithPunc(text[1]) as word}
       <span id={`${algorithm}-${stripPunc(word)}-1`}>{word} </span>
     {/each}
   </div>
-  <div class="text hide">
+  <div class="text hide" aria-hidden={true}>
     {#each wordsWithPunc(text[2]) as word}
       <span id={`${algorithm}-${stripPunc(word)}-2`}>{word} </span>
     {/each}
   </div>
 
   {#if allPositions}
-    <div class="text">
+    <div class="text" aria-hidden={true}>
       {#each allWords as word}
         <span
           class:word={true}

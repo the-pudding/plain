@@ -19,6 +19,9 @@
   let refs = [];
   let currentHeight = 0;
 
+  // let screenreaderChecked = false;
+  // $: screenreaderChecked, switchView();
+
   $: $toggle, toggleChange();
   $: view, $viewport, standard, plain, updateHeights();
   $: if (deepDiveOpen) updateDeep();
@@ -113,12 +116,14 @@
   {/if}
 </div>
 <div
-  aria-hidden={true}
   class:outer={true}
+  aria-hidden={true}
   class:no-plain={noPlain}
   class:deep-dive={deepDive}
   bind:this={outerEl}
 >
+  <!-- <input type="checkbox" bind:checked={screenreaderChecked} class="sr-only" /> -->
+
   <div
     class:inner={true}
     class:show-plain={view === "plain" && !noPlain}
