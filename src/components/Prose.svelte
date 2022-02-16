@@ -125,7 +125,9 @@
     class:show-standard={view === "standard" && !noPlain}
     class:info-box={!subtitle && noPlain}
   >
-    {#if subtitle}
+    {#if subtitle && subtitle.includes("human")}
+      <h2 class="text">{subtitle}</h2>
+    {:else if subtitle}
       <h3 class="text">{subtitle}</h3>
     {:else if noPlain}
       {#each standard as { type, value }}
