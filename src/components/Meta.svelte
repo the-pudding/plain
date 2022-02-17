@@ -1,7 +1,7 @@
 <script>
   export let title = "What makes writing more readable?";
   export let description = "Looking at how to make writing easier to read";
-  export let url = "https://pudding.cool";
+  export let url = "https://pudding.cool/2022/02/plain";
 </script>
 
 <svelte:head>
