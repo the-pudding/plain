@@ -259,7 +259,11 @@
 
   .info-box {
     background-color: #f3f1f1;
-    padding: 0.25em 0.5em 0.25em 0.5em;
+    padding: 0em 1em 0em 1em;
+  }
+  .info-box p {
+    margin-top: 0.7em;
+    margin-bottom: 0.7em;
   }
 
   .text {
